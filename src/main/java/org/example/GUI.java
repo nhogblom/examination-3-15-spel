@@ -5,6 +5,7 @@ import javax.swing.*;
 public class GUI extends JFrame {
 
     JFrame frame = new JFrame();
+    GameBoardPanel gameBoardPanel = new GameBoardPanel();
 
     GUI(){
 
@@ -13,6 +14,7 @@ public class GUI extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
+        frame.add(gameBoardPanel);
     }
 
 }
