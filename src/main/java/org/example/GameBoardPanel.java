@@ -12,6 +12,7 @@ public class GameBoardPanel extends JPanel {
     JButton newGameButton = new JButton("New Game");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
+    ArrayList<JButton> gameButtons = createJButtonArrayList(15);
 
     GameBoardPanel(){
         setLayout(new BorderLayout());
@@ -24,6 +25,9 @@ public class GameBoardPanel extends JPanel {
         //Knappar
         add(buttonPanel,BorderLayout.SOUTH);
         buttonPanel.add(newGameButton);
+        newGameButton.addActionListener(new NewGameButtonActionListener(gameBoardPanel));
+
+
         buttonPanel.add(closeButton);
 
 
@@ -34,10 +38,13 @@ public class GameBoardPanel extends JPanel {
 
         //Skapar spel knappar, randomizear dom och skriver ut.
         //TODO storleken ska komma från input i Login Panel sen.
-        ArrayList<JButton> gameButtons = createJButtonArrayList(15);
+
         gameButtons = randomizeButtons(gameButtons);
         printGameBoardButtons(gameButtons);
         IO.println("Arrayer är lika (spelet är vunnet) = " + checkIfGameIsWon(gameButtons));
+        for(JButton button : gameButtons){
+            IO.print(" " + button.getText());
+        }
 
     }
 
@@ -54,7 +61,7 @@ public class GameBoardPanel extends JPanel {
         return true;
     }
 
-    private ArrayList<JButton> createJButtonArrayList(int numberOfGameButtons){
+    protected ArrayList<JButton> createJButtonArrayList(int numberOfGameButtons){
         ArrayList<JButton> gameButtons = new ArrayList<>();
         for(int i = 0; i < numberOfGameButtons; i++){
             gameButtons.add(new JButton(String.valueOf(i+1)));
@@ -62,15 +69,24 @@ public class GameBoardPanel extends JPanel {
         return gameButtons;
     }
 
-    private void printGameBoardButtons(ArrayList<JButton> gameButtons){
+    protected void printGameBoardButtons(ArrayList<JButton> gameButtons){
         for(JButton button : gameButtons){
             gameBoardPanel.add(button);
         }
+        gameBoardPanel.revalidate();
+        gameBoardPanel.repaint();
     }
 
-    private ArrayList<JButton> randomizeButtons(ArrayList<JButton> buttons){
+    protected ArrayList<JButton> randomizeButtons(ArrayList<JButton> buttons){
          Collections.shuffle(buttons);
          return buttons;
     }
 
+    public ArrayList<JButton> getGameButtons() {
+        return gameButtons;
+    }
+
+    public void setGameButtons(ArrayList<JButton> gameButtons) {
+        this.gameButtons = gameButtons;
+    }
 }
