@@ -19,6 +19,7 @@ public class GameBoardPanel extends JPanel {
 
         //Text NORTH
         add(welcomeLabel,BorderLayout.NORTH);
+        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 
         //Knappar
         add(buttonPanel,BorderLayout.SOUTH);
@@ -29,13 +30,25 @@ public class GameBoardPanel extends JPanel {
         add(gameBoardPanel,BorderLayout.CENTER);
         gameBoardPanel.setLayout(new GridLayout(4,4));
 
-        //Skapar knappar
-        ArrayList<JButton> buttons = new ArrayList<JButton>();
+        //Skapar spel knappar, randomizear dom och skriver ut.
         //TODO storleken ska komma från input i Login Panel sen.
-        for(int i = 0; i < 16; i++){
-            buttons.add(new JButton(String.valueOf(i+1)));
-        }
+        ArrayList<JButton> gameButtons = createJButtonArrayList(15);
+        gameButtons = randomizeButtons(gameButtons);
+        printGameBoardButtons(gameButtons);
 
+    }
+    private ArrayList<JButton> createJButtonArrayList(int numberOfGameButtons){
+        ArrayList<JButton> gameButtons = new ArrayList<>();
+        for(int i = 0; i < numberOfGameButtons; i++){
+            gameButtons.add(new JButton(String.valueOf(i+1)));
+        }
+        return gameButtons;
+    }
+
+    private void printGameBoardButtons(ArrayList<JButton> gameButtons){
+        for(JButton button : gameButtons){
+            gameBoardPanel.add(button);
+        }
     }
 
     private ArrayList<JButton> randomizeButtons(ArrayList<JButton> buttons){
