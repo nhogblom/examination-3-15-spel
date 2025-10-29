@@ -26,7 +26,6 @@ public class StartPanel extends JPanel {
     headerPanel.add(titleLabel);
     optionsPanel.add(startButton);
     startButton.addActionListener(e->{
-
     });
     optionsPanel.add(highscoreButton);
     optionsPanel.add(settingsButton);
