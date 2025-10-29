@@ -12,7 +12,7 @@ public class GameBoardPanel extends JPanel {
     JButton newGameButton = new JButton("New Game");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
-    ArrayList<JButton> gameButtons = createJButtonArrayList(15);
+    static ArrayList<JButton> gameButtons = new ArrayList<>();
 
     GameBoardPanel(){
         setLayout(new BorderLayout());
@@ -39,18 +39,20 @@ public class GameBoardPanel extends JPanel {
         //Skapar spel knappar, randomizear dom och skriver ut.
         //TODO storleken ska komma från input i Login Panel sen.
 
+        createJButtonArrayList(15);
         gameButtons = randomizeButtons(gameButtons);
         printGameBoardButtons(gameButtons);
-        IO.println("Arrayer är lika (spelet är vunnet) = " + checkIfGameIsWon(gameButtons));
-        for(JButton button : gameButtons){
-            IO.print(" " + button.getText());
-        }
+//        IO.println("Arrayer är lika (spelet är vunnet) = " + checkIfGameIsWon(gameButtons));
+
 
     }
 
     private boolean checkIfGameIsWon(ArrayList<JButton> gameButtons){
         //TODO storleken ska komma från input i Login Panel.
-        ArrayList<JButton> gameIsWonGameButtonsSort = createJButtonArrayList(15);
+        ArrayList<JButton> gameIsWonGameButtonsSort = new ArrayList<>();
+        for(int i = 0 ; i < gameButtons.size(); i++){
+            gameIsWonGameButtonsSort.add(new JButton(String.valueOf(i+1)));
+        }
         int index = 0;
         for(JButton button : gameIsWonGameButtonsSort){
             if(!(button.getText().equals(gameButtons.get(index).getText()))){
@@ -61,20 +63,16 @@ public class GameBoardPanel extends JPanel {
         return true;
     }
 
-    protected ArrayList<JButton> createJButtonArrayList(int numberOfGameButtons){
-        ArrayList<JButton> gameButtons = new ArrayList<>();
+    protected void createJButtonArrayList(int numberOfGameButtons){
         for(int i = 0; i < numberOfGameButtons; i++){
             gameButtons.add(new JButton(String.valueOf(i+1)));
         }
-        return gameButtons;
     }
 
     protected void printGameBoardButtons(ArrayList<JButton> gameButtons){
         for(JButton button : gameButtons){
             gameBoardPanel.add(button);
         }
-        gameBoardPanel.revalidate();
-        gameBoardPanel.repaint();
     }
 
     protected ArrayList<JButton> randomizeButtons(ArrayList<JButton> buttons){
@@ -82,11 +80,4 @@ public class GameBoardPanel extends JPanel {
          return buttons;
     }
 
-    public ArrayList<JButton> getGameButtons() {
-        return gameButtons;
-    }
-
-    public void setGameButtons(ArrayList<JButton> gameButtons) {
-        this.gameButtons = gameButtons;
-    }
 }
