@@ -26,6 +26,8 @@ public class GameBoardPanel extends JPanel {
         buttonPanel.add(newGameButton);
         buttonPanel.add(closeButton);
 
+
+
         //Spelet Grid CENTER
         add(gameBoardPanel,BorderLayout.CENTER);
         gameBoardPanel.setLayout(new GridLayout(4,4));
@@ -35,7 +37,7 @@ public class GameBoardPanel extends JPanel {
         ArrayList<JButton> gameButtons = createJButtonArrayList(15);
         gameButtons = randomizeButtons(gameButtons);
         printGameBoardButtons(gameButtons);
-        IO.println(checkIfGameIsWon(gameButtons));
+        IO.println("Arrayer är lika (spelet är vunnet) = " + checkIfGameIsWon(gameButtons));
 
     }
 
