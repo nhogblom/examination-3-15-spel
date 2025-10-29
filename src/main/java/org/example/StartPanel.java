@@ -36,6 +36,5 @@ public class StartPanel extends JPanel {
 
     }
 
-    void main() {
-    }
+
 }
