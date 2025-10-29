@@ -35,8 +35,23 @@ public class GameBoardPanel extends JPanel {
         ArrayList<JButton> gameButtons = createJButtonArrayList(15);
         gameButtons = randomizeButtons(gameButtons);
         printGameBoardButtons(gameButtons);
+        IO.println(checkIfGameIsWon(gameButtons));
 
     }
+
+    private boolean checkIfGameIsWon(ArrayList<JButton> gameButtons){
+        //TODO storleken ska komma från input i Login Panel.
+        ArrayList<JButton> gameIsWonGameButtonsSort = createJButtonArrayList(15);
+        int index = 0;
+        for(JButton button : gameIsWonGameButtonsSort){
+            if(!(button.getText().equals(gameButtons.get(index).getText()))){
+                return false;
+            }
+            index++;
+        }
+        return true;
+    }
+
     private ArrayList<JButton> createJButtonArrayList(int numberOfGameButtons){
         ArrayList<JButton> gameButtons = new ArrayList<>();
         for(int i = 0; i < numberOfGameButtons; i++){
