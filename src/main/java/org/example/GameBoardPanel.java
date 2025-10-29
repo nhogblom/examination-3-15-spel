@@ -2,6 +2,8 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameBoardPanel extends JPanel {
 
@@ -26,16 +28,19 @@ public class GameBoardPanel extends JPanel {
         //Spelet Grid CENTER
         add(gameBoardPanel,BorderLayout.CENTER);
         gameBoardPanel.setLayout(new GridLayout(4,4));
+
+        //Skapar knappar
+        ArrayList<JButton> buttons = new ArrayList<JButton>();
+        //TODO storleken ska komma från input i Login Panel sen.
         for(int i = 0; i < 16; i++){
-            new JButton(String.valueOf(i+1));
+            buttons.add(new JButton(String.valueOf(i+1)));
         }
-
-
-
-
-
 
     }
 
+    private ArrayList<JButton> randomizeButtons(ArrayList<JButton> buttons){
+         Collections.shuffle(buttons);
+         return buttons;
+    }
 
 }
