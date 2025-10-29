@@ -7,8 +7,7 @@ public class GUI extends JFrame {
     JFrame frame = new JFrame();
     GameBoardPanel gameBoardPanel = new GameBoardPanel();
 
-    // testar StartPanel
-    //StartPanel startPanel = new StartPanel();
+
 
     GUI() {
 
@@ -18,7 +17,7 @@ public class GUI extends JFrame {
         frame.setVisible(true);
 
         frame.add(gameBoardPanel);
-        //rame.add(startPanel);
+
     }
 
 }
