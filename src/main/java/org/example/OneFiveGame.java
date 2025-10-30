@@ -1,101 +1,121 @@
 package org.example;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class OneFiveGame {
-    private List<Integer> GameBoard = new ArrayList<Integer>();
+    private List<Integer> GameBoard = new ArrayList<>();
     private int gameBoardSizeX;
     private int gameBoardSizeY;
+    private int amountOfBoardTiles;
+    private boolean isDemo = false;
+    private boolean currentGameWon = false;
+
 
     public OneFiveGame(int gameBoardSizeX, int gameBoardSizeY) {
         this.gameBoardSizeX = gameBoardSizeX;
         this.gameBoardSizeY = gameBoardSizeY;
-        int xyValue = gameBoardSizeX * gameBoardSizeY;
+        this.amountOfBoardTiles = gameBoardSizeX * gameBoardSizeY;
+        createGameBoard();
+    }
 
-        for (int i = 0; i < xyValue; i++) {
-            GameBoard.add(i);
+    public OneFiveGame(boolean isDemo) {
+        this.isDemo = isDemo;
+        createGameBoard();
+    }
+
+    private void checkIfGameIsWon() {
+        if (GameBoard.getLast() == 0) {
+            for (int i = 0; i < GameBoard.size(); i++) {
+                if (GameBoard.get(i) == 0) {
+                    this.currentGameWon = true;
+                    System.out.println("Game Won");
+                }else if (GameBoard.get(i) != (i+1)) {
+                    this.currentGameWon = false;
+                    break;
+                }
+            }
         }
-        Collections.shuffle(GameBoard);
-        System.out.println(GameBoard.toString());
-        System.out.println(GameBoard.size());
-        isMovable(12);
     }
 
     public void createGameBoard() {
-
+        if (isDemo) {
+            // one move to win demo.
+            gameBoardSizeX = 2;
+            gameBoardSizeY = 2;
+            amountOfBoardTiles = gameBoardSizeX * gameBoardSizeY;
+            GameBoard.add(1);
+            GameBoard.add(0);
+            GameBoard.add(3);
+            GameBoard.add(2);
+        } else {
+            for (int i = 0; i < amountOfBoardTiles; i++) {
+                GameBoard.add(i);
+            }
+            Collections.shuffle(GameBoard);
+        }
     }
 
-    // falsk triggar true ifall objectToMove är det objektet mest east av en rad och 0 är nästa i listan men mest west~
-    public boolean isMovable(int objectToMove) {
-        int objectToMoveIndex = GameBoard.indexOf(objectToMove);
-        System.out.println("objectToMoveIndex: " + objectToMoveIndex);
-        int objectRow = objectToMoveIndex / gameBoardSizeX;
-        int objectCol = objectToMoveIndex % gameBoardSizeX;
-        System.out.println("objectRow: " + (objectRow + 1) + ", objectCol: " + (objectCol + 1));
-        boolean north, south, east, west;
-        if (objectCol - 1 >= 0) {
-            if (GameBoard.get(((objectRow) * 4) + objectCol - 1).equals(0)) {
-                west = true;
-            } else {
-                west = false;
-            }
-        } else {
-            west = false;
+    public void move(int numberToMove) {
+        int whereToMove = isMovePossibleAndWhereTo(numberToMove);
+        int whereWeAreMovingFrom = GameBoard.indexOf(numberToMove);
+        if (whereToMove != -1) {
+            GameBoard.set(whereToMove, numberToMove);
+            GameBoard.set(whereWeAreMovingFrom, 0);
         }
-        if (objectRow - 1 >= 0) {
-            if (GameBoard.get(objectToMoveIndex - gameBoardSizeX).equals(0)) {
-                north = true;
-            } else {
-                north = false;
-            }
-        } else {
-            north = false;
-        }
-        if (objectRow + 1 <= gameBoardSizeY-1) {
-            if (GameBoard.get(objectToMoveIndex + gameBoardSizeX).equals(0)) {
-                south = true;
-            } else {
-                south = false;
-            }
-        } else {
-            south = false;
-        }
-        if (objectCol + 1 <= gameBoardSizeX-1) {
-            if (GameBoard.get((objectRow * 4) + objectCol + 1).equals(0)) {
-                east = true;
-            } else {
-                east = false;
-            }
-        } else {
-            east = false;
-        }
-        System.out.println("north: " + north);
-        System.out.println("east: " + east);
-        System.out.println("south: " + south);
-        System.out.println("west: " + west);
-        printGameBoardToTerminal();
-        return true;
     }
+
+    private int indexOfZero() {
+        return GameBoard.indexOf(0);
+    }
+
+
+    public int isMovePossibleAndWhereTo(int numberToMove) {
+        int numberToMoveIndex = GameBoard.indexOf(numberToMove);
+        int indexOfZero = indexOfZero();
+        int numberRow = numberToMoveIndex / gameBoardSizeX;
+        int numberCol = numberToMoveIndex % gameBoardSizeX;
+        if (numberCol - 1 >= 0) {
+            int indexWest = ((numberRow * gameBoardSizeX) + numberCol - 1);
+            if (indexWest == indexOfZero) {
+                return indexWest;
+            }
+        }
+        if (numberRow - 1 >= 0) {
+            int indexNorth = (numberToMoveIndex - gameBoardSizeX);
+            if (indexNorth == indexOfZero) {
+                return indexNorth;
+            }
+        }
+
+        if (numberRow + 1 <= gameBoardSizeY - 1) {
+            int indexSouth = (numberToMoveIndex + gameBoardSizeX);
+            if (indexSouth == indexOfZero) {
+                return indexSouth;
+            }
+        }
+        if (numberCol + 1 <= gameBoardSizeX - 1) {
+            int indexEast = ((numberRow * gameBoardSizeX) + numberCol + 1);
+            if (indexEast == indexOfZero) {
+                return indexEast;
+            }
+        }
+        return -1;
+    }
+
 
     public void printGameBoardToTerminal() {
         for (int i = 0; i < gameBoardSizeY; i++) {
-            for (int j = 0; j < GameBoard.size() / 4; j++) {
-                System.out.print("[" + GameBoard.get((i * 4) + j) + "]");
+            for (int j = 0; j < GameBoard.size() / gameBoardSizeX; j++) {
+                System.out.print("[" + GameBoard.get((i * gameBoardSizeX) + j) + "]");
             }
             System.out.println("\n");
         }
     }
 
-    public void getTerminalPickFromUser(){
+    public void getTerminalPickFromUser() {
         String tokenToMove = IO.readln("Skriv in den siffra du vill flytta: ");
         int tokenToMoveInt = Integer.parseInt(tokenToMove);
-        System.out.println(isMovable(tokenToMoveInt));
-    }
-
-
-    static void main() {
-        OneFiveGame oneFiveGame = new OneFiveGame(4, 4);
+        move(tokenToMoveInt);
     }
 }
