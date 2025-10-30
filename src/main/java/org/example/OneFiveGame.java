@@ -133,6 +133,10 @@ public class OneFiveGame {
         return gameBoardSizeY;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void printGameBoardToTerminal() {
         for (int i = 0; i < gameBoardSizeY; i++) {
             for (int j = 0; j < gameBoard.size() / gameBoardSizeX; j++) {
