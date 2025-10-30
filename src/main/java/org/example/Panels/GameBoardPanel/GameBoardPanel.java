@@ -35,9 +35,7 @@ public class GameBoardPanel extends JPanel {
         buttonPanel.add(newGameButton);
         newGameButton.addActionListener(e -> { newGame(); });
         buttonPanel.add(closeButton);
-        closeButton.addActionListener(e -> {
-            System.exit(0);
-        });
+        closeButton.addActionListener(e -> {System.exit(0);});
 
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
@@ -53,9 +51,7 @@ public class GameBoardPanel extends JPanel {
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         gameBoardPanel.setVisible(true);
-        // todo ändra så att den tar input från gui för att skapa rätt storlek av spelet.
-        // todo se även till att användardata så som användarnamn förs vidare till det nya spelet.
-        ofg = new OneFiveGame("användarnamn",2, 2);
+        ofg = new OneFiveGame(ofg.getUsername(), ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY());
         printGameBoard();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
