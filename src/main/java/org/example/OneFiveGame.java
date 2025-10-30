@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class OneFiveGame {
-    List<Integer> GameBoard = new ArrayList<Integer>();
-    int gameBoardSizeX;
-    int gameBoardSizeY;
+    private List<Integer> GameBoard = new ArrayList<Integer>();
+    private int gameBoardSizeX;
+    private int gameBoardSizeY;
 
     public OneFiveGame(int gameBoardSizeX, int gameBoardSizeY) {
         this.gameBoardSizeX = gameBoardSizeX;
@@ -21,6 +21,10 @@ public class OneFiveGame {
         System.out.println(GameBoard.toString());
         System.out.println(GameBoard.size());
         isMovable(12);
+    }
+
+    public void createGameBoard() {
+
     }
 
     // falsk triggar true ifall objectToMove är det objektet mest east av en rad och 0 är nästa i listan men mest west~
