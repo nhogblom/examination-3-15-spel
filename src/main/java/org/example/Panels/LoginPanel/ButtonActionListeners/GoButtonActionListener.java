@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Panels.LoginPanel.ButtonActionListeners;
+
+import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

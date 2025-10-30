@@ -1,8 +1,9 @@
-package org.example;
+package org.example.Panels.LoginPanel;
+
+import org.example.Panels.LoginPanel.ButtonActionListeners.GoButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel {
     JPanel headerPanel = new JPanel();

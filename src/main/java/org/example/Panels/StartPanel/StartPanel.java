@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Panels.StartPanel;
+
+import org.example.Panels.StartPanel.startButtonActionListener.startButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;

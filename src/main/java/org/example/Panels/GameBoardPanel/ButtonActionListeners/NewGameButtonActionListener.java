@@ -1,7 +1,7 @@
-package org.example;
+package org.example.Panels.GameBoardPanel.ButtonActionListeners;
+import org.example.Panels.GameBoardPanel.GameBoardPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,7 +9,7 @@ public class NewGameButtonActionListener implements ActionListener {
 
     JPanel gameBoardPanel;
 
-    NewGameButtonActionListener(JPanel gameBoardPanel) {
+    public NewGameButtonActionListener(JPanel gameBoardPanel) {
         this.gameBoardPanel = gameBoardPanel;
     }
 

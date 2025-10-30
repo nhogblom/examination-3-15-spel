@@ -1,7 +1,8 @@
-package org.example;
+package org.example.Panels.StartPanel.startButtonActionListener;
+
+import org.example.Panels.GameBoardPanel.GameBoardPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
