@@ -26,20 +26,24 @@ public class GoButtonActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(jp);
-        // todo fixa felhantering
 
+        try {
 
-        String userNameString = username.getText();
-        int gridSizeXInt = Integer.parseInt(gridSizeX.getText());
-        int gridSizeYInt = Integer.parseInt(gridSizeY.getText());
+            String userNameString = username.getText();
+            int gridSizeXInt = Integer.parseInt(gridSizeX.getText());
+            int gridSizeYInt = Integer.parseInt(gridSizeY.getText());
 
-        this.ofg = new OneFiveGame(userNameString,gridSizeXInt,gridSizeYInt);
-        jp.setVisible(false);
+            this.ofg = new OneFiveGame(userNameString, gridSizeXInt, gridSizeYInt);
+            jp.setVisible(false);
 
-        GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
-        frame.add(gameBoardPanel);
-        frame.revalidate();
-        frame.repaint();
+            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
+            frame.add(gameBoardPanel);
+            frame.revalidate();
+            frame.repaint();
+        }
+        catch (Exception error) {
+            //doing nothing
+        }
     }
 
 }
