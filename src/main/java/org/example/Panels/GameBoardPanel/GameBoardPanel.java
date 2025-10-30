@@ -56,7 +56,7 @@ public class GameBoardPanel extends JPanel {
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
     }
-    
+
 
 
     private void printGameBoard() {
@@ -89,6 +89,7 @@ public class GameBoardPanel extends JPanel {
     }
 
     private void printWinningScreen(){
+        //todo här kan vi lägga till vinster med mera till highscore~
         gameBoardPanel.setVisible(false);
         // sätter en vinstskärm
         add(winningPicture, BorderLayout.CENTER);
@@ -96,5 +97,4 @@ public class GameBoardPanel extends JPanel {
         revalidate();
         repaint();
     }
-
 }
