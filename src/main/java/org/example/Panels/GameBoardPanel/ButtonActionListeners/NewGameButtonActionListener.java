@@ -16,13 +16,13 @@ public class NewGameButtonActionListener implements ActionListener {
     //TODO ta bort hårdkodade 15 och få in så den använder samma inställningar som från login screen.
     @Override
     public void actionPerformed(ActionEvent e) {
-        GameBoardPanel gbp = (GameBoardPanel) gameBoardPanel.getParent();
-        gameBoardPanel.removeAll();
-        GameBoardPanel.gameButtons.clear();
-        gbp.createJButtonArrayList(15);
-        gbp.randomizeButtons(GameBoardPanel.gameButtons);
-        gbp.printGameBoardButtons(GameBoardPanel.gameButtons);
-        gameBoardPanel.revalidate();
-        gameBoardPanel.repaint();
+//        GameBoardPanel gbp = (GameBoardPanel) gameBoardPanel.getParent();
+//        gameBoardPanel.removeAll();
+//        GameBoardPanel.gameButtons.clear();
+//        gbp.createJButtonArrayList(15);
+//        gbp.randomizeButtons(GameBoardPanel.gameButtons);
+//        gbp.printGameBoardButtons(GameBoardPanel.gameButtons);
+//        gameBoardPanel.revalidate();
+//        gameBoardPanel.repaint();
     }
 }
