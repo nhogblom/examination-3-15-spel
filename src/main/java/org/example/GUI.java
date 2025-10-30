@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Panels.LoginPanel.LoginPanel;
+
 import javax.swing.*;
 
 public class GUI extends JFrame {
