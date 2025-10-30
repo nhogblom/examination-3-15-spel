@@ -24,18 +24,21 @@ public class OneFiveGame {
         createGameBoard();
     }
 
-    private void checkIfGameIsWon() {
+    private void setIfGameIsWon() {
         if (GameBoard.getLast() == 0) {
             for (int i = 0; i < GameBoard.size(); i++) {
                 if (GameBoard.get(i) == 0) {
                     this.currentGameWon = true;
-                    System.out.println("Game Won");
                 }else if (GameBoard.get(i) != (i+1)) {
                     this.currentGameWon = false;
                     break;
                 }
             }
         }
+    }
+
+    public boolean isCurrentGameWon() {
+        return currentGameWon;
     }
 
     public void createGameBoard() {
@@ -63,6 +66,7 @@ public class OneFiveGame {
             GameBoard.set(whereToMove, numberToMove);
             GameBoard.set(whereWeAreMovingFrom, 0);
         }
+        setIfGameIsWon();
     }
 
     private int indexOfZero() {
@@ -117,5 +121,9 @@ public class OneFiveGame {
         String tokenToMove = IO.readln("Skriv in den siffra du vill flytta: ");
         int tokenToMoveInt = Integer.parseInt(tokenToMove);
         move(tokenToMoveInt);
+    }
+
+    public List<Integer> getGameBoard() {
+        return GameBoard;
     }
 }
