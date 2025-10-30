@@ -95,5 +95,8 @@ public class GameBoardPanel extends JPanel {
         winningPicture.setVisible(true);
         revalidate();
         repaint();
+        //todo ta bort denna och inkludera istället getMoveCounter till lagring av highscore~
+        // testar move counter
+        System.out.println("Du vann på "+ofg.getMoveCounter()+" steg.");
     }
 }
