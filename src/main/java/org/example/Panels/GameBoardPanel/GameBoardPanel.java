@@ -42,9 +42,8 @@ public class GameBoardPanel extends JPanel {
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
 
-        //todo se till att användardata sätter spelets storlek
-//        gameBoardPanel.setLayout(new GridLayout(4, 4));
-        gameBoardPanel.setLayout(new GridLayout(2, 2));
+
+        gameBoardPanel.setLayout(new GridLayout(ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY()));
 
         // display game
         printGameBoard();
