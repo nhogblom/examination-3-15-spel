@@ -1,7 +1,6 @@
 package org.example;
 
-import org.example.Panels.GameBoardPanel.GameBoardPanel;
-import org.example.Panels.LoginPanel.LoginPanel;
+
 import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;
