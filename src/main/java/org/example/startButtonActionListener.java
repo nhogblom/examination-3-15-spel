@@ -20,6 +20,5 @@ public class startButtonActionListener implements ActionListener {
         frame.add(gameBoardPanel);
         frame.revalidate();
         frame.repaint();
-
     }
 }

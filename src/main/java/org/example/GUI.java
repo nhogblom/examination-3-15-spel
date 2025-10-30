@@ -5,7 +5,7 @@ import javax.swing.*;
 public class GUI extends JFrame {
 
     JFrame frame = new JFrame();
-    StartPanel startPanel = new StartPanel();
+    LoginPanel loginPanel = new LoginPanel();
 
 
     GUI() {
@@ -14,8 +14,8 @@ public class GUI extends JFrame {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        frame.add(startPanel);
-        startPanel.setVisible(true);
+        frame.add(loginPanel);
+        loginPanel.setVisible(true);
     }
 
 }
