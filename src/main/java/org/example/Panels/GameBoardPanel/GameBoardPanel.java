@@ -4,22 +4,24 @@ import org.example.OneFiveGame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameBoardPanel extends JPanel {
-
     // todo ändra så att den tar input från gui för att skapa rätt storlek av spelet.
 //    OneFiveGame ofg = new OneFiveGame(4, 4);
     OneFiveGame ofg = new OneFiveGame(true);
-
     JLabel welcomeLabel = new JLabel("Welcome to the game");
     JButton closeButton = new JButton("Close");
     JButton newGameButton = new JButton("New Game");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
-    JLabel winningPicture = new JLabel(new ImageIcon("src/main/resources/win.png"));
+    //todo se till att width och height blir korrekt
+    JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
     public static ArrayList<JButton> gameButtons = new ArrayList<>();
+
+
 
     public GameBoardPanel() {
         setLayout(new BorderLayout());
@@ -32,37 +34,21 @@ public class GameBoardPanel extends JPanel {
         //Knappar
         add(buttonPanel, BorderLayout.SOUTH);
         buttonPanel.add(newGameButton);
-        // ändrade från listener class till lambda
-//        newGameButton.addActionListener(new NewGameButtonActionListener(gameBoardPanel));
-        newGameButton.addActionListener(e -> {
-            newGame();
-        });
-
-
+        newGameButton.addActionListener(e -> { newGame(); });
         buttonPanel.add(closeButton);
         closeButton.addActionListener(e -> {
             System.exit(0);
         });
 
-
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
 
-
-
-
+        //todo se till att användardata sätter spelets storlek
 //        gameBoardPanel.setLayout(new GridLayout(4, 4));
         gameBoardPanel.setLayout(new GridLayout(2, 2));
 
-        //Skapar spel knappar, randomizear dom och skriver ut.
-        //TODO storleken ska komma från input i Login Panel sen.
-
-        //createJButtonArrayList(15);
-
-        printGameBoardButtons();
-//        IO.println("Arrayer är lika (spelet är vunnet) = " + checkIfGameIsWon(gameButtons));
-
-
+        // display game
+        printGameBoard();
     }
 
     public void newGame() {
@@ -70,8 +56,9 @@ public class GameBoardPanel extends JPanel {
         GameBoardPanel.gameButtons.clear();
         gameBoardPanel.setVisible(true);
         // todo ändra så att den tar input från gui för att skapa rätt storlek av spelet.
+        // todo se även till att användardata så som användarnamn förs vidare till det nya spelet.
         ofg = new OneFiveGame(2, 2);
-        printGameBoardButtons();
+        printGameBoard();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
     }
@@ -93,35 +80,42 @@ public class GameBoardPanel extends JPanel {
     }
 
 
-    public void printGameBoardButtons() {
+    public void printGameBoard() {
         List<Integer> gameBoard = ofg.getGameBoard();
         for (int i = 0; i < gameBoard.size(); i++) {
-            JButton curButton = new JButton(String.valueOf(gameBoard.get(i)));
-            if (!ofg.isCurrentGameWon()) {
+            JButton curButton;
+            if (gameBoard.get(i) == 0) {
+                curButton = new JButton("");
+            }else {
+                curButton = new JButton(String.valueOf(gameBoard.get(i)));
                 curButton.addActionListener(e -> {
                     moveAndRepaint(Integer.parseInt(curButton.getText()));
                 });
-            }else{
-                gameBoardPanel.setVisible(false);
-                // sätter en vinstskärm
-                add(winningPicture, BorderLayout.CENTER);
-                winningPicture.setVisible(true);
-
             }
             gameBoardPanel.add(curButton);
         }
     }
 
+
     private void moveAndRepaint(int number) {
         ofg.move(number);
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
-        printGameBoardButtons();
+        printGameBoard();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
         if (ofg.isCurrentGameWon()) {
-            System.out.println("GAME IS WON");
+            printWinningScreen();
         }
+    }
+
+    public void printWinningScreen(){
+        gameBoardPanel.setVisible(false);
+        // sätter en vinstskärm
+        add(winningPicture, BorderLayout.CENTER);
+        winningPicture.setVisible(true);
+        revalidate();
+        repaint();
     }
 
 }
