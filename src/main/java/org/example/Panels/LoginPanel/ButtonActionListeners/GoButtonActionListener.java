@@ -1,5 +1,7 @@
 package org.example.Panels.LoginPanel.ButtonActionListeners;
 
+import org.example.OneFiveGame;
+import org.example.Panels.GameBoardPanel.GameBoardPanel;
 import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;
@@ -8,18 +10,34 @@ import java.awt.event.ActionListener;
 
 public class GoButtonActionListener implements ActionListener {
     JPanel jp;
+    JTextField username;
+    JTextField gridSizeX;
+    JTextField gridSizeY;
+    OneFiveGame ofg;
 
-    public GoButtonActionListener(JPanel jp) {
+    public GoButtonActionListener(JPanel jp, JTextField username, JTextField gridSizeX, JTextField gridSizeY) {
         this.jp = jp;
+        this.username = username;
+        this.gridSizeX = gridSizeX;
+        this.gridSizeY = gridSizeY;
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(jp);
+        // todo fixa felhantering
+
+
+        String userNameString = username.getText();
+        int gridSizeXInt = Integer.parseInt(gridSizeX.getText());
+        int gridSizeYInt = Integer.parseInt(gridSizeY.getText());
+
+        this.ofg = new OneFiveGame(userNameString,gridSizeXInt,gridSizeYInt);
         jp.setVisible(false);
-        StartPanel startPanel = new StartPanel();
-        frame.add(startPanel);
+
+        GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
+        frame.add(gameBoardPanel);
         frame.revalidate();
         frame.repaint();
     }
