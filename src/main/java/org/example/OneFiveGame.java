@@ -125,6 +125,13 @@ public class OneFiveGame {
         return gameBoard;
     }
 
+    public int getGameBoardSizeX() {
+        return gameBoardSizeX;
+    }
+
+    public int getGameBoardSizeY() {
+        return gameBoardSizeY;
+    }
 
     public void printGameBoardToTerminal() {
         for (int i = 0; i < gameBoardSizeY; i++) {
