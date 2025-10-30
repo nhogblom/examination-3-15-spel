@@ -56,22 +56,7 @@ public class GameBoardPanel extends JPanel {
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
     }
-
-    private boolean checkIfGameIsWon(ArrayList<JButton> gameButtons) {
-        //TODO storleken ska komma från input i Login Panel.
-        ArrayList<JButton> gameIsWonGameButtonsSort = new ArrayList<>();
-        for (int i = 0; i < gameButtons.size(); i++) {
-            gameIsWonGameButtonsSort.add(new JButton(String.valueOf(i + 1)));
-        }
-        int index = 0;
-        for (JButton button : gameIsWonGameButtonsSort) {
-            if (!(button.getText().equals(gameButtons.get(index).getText()))) {
-                return false;
-            }
-            index++;
-        }
-        return true;
-    }
+    
 
 
     private void printGameBoard() {
