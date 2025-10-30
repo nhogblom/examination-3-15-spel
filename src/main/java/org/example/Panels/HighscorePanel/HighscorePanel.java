@@ -51,12 +51,6 @@ public class HighscorePanel extends JPanel {
         add(buttonPanel,BorderLayout.SOUTH);
         buttonPanel.add(backButton);
 
-
-
-
-
-
-
     }
 
 }
