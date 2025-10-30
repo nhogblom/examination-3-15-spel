@@ -14,7 +14,8 @@ public class LoginPanel extends JPanel {
     JTextField usernameField = new JTextField();
     JLabel gridSizeXLabel = new JLabel("Gridsize rows: ");
     JLabel gridSizeYLabel = new JLabel("Gridsize rows: ");
-    JTextField gridSizeX = new JTextField();JTextField gridSizeY = new JTextField();
+    JTextField gridSizeX = new JTextField();
+    JTextField gridSizeY = new JTextField();
     JLabel footerSignature = new JLabel("Ivan & Niklas 2025");
     JButton goButton = new JButton("Go");
 
@@ -38,7 +39,7 @@ public class LoginPanel extends JPanel {
         footerPanel.add(footerSignature);
         footerSignature.setHorizontalAlignment(JLabel.CENTER);
 
-        goButton.addActionListener(new GoButtonActionListener(this));
+        goButton.addActionListener(new GoButtonActionListener(this,usernameField,gridSizeX,gridSizeY));
 
 
     }
