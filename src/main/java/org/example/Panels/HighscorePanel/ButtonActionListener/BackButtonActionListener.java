@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class BackButtonActionListener implements ActionListener {
     JPanel highScorePanel;
 
-    public BackButtonActionListener(JPanel panel) {
+    public BackButtonActionListener(JPanel highScorePanel) {
         this.highScorePanel = highScorePanel;
     }
 

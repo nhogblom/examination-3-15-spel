@@ -1,5 +1,7 @@
 package org.example.Panels.HighscorePanel;
 
+import org.example.Panels.HighscorePanel.ButtonActionListener.BackButtonActionListener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.Time;
@@ -50,6 +52,7 @@ public class HighscorePanel extends JPanel {
 
         add(buttonPanel,BorderLayout.SOUTH);
         buttonPanel.add(backButton);
+        backButton.addActionListener(new BackButtonActionListener(this));
 
     }
 
