@@ -84,6 +84,12 @@ public class OneFiveGame {
         }
     }
 
+    public void getTerminalPickFromUser(){
+        String tokenToMove = IO.readln("Skriv in den siffra du vill flytta: ");
+        int tokenToMoveInt = Integer.parseInt(tokenToMove);
+        System.out.println(isMovable(tokenToMoveInt));
+    }
+
 
     static void main() {
         OneFiveGame oneFiveGame = new OneFiveGame(4, 4);
