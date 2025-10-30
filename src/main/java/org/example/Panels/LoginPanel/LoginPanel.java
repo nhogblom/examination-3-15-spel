@@ -12,8 +12,8 @@ public class LoginPanel extends JPanel {
     JLabel titleLabel = new JLabel("<html><h1>Starting up a new game!</h1></html>");
     JLabel usernameLabel = new JLabel("Enter your username:");
     JTextField usernameField = new JTextField();
-    JLabel gridSizeXLabel = new JLabel("Gridsize rows: ");
-    JLabel gridSizeYLabel = new JLabel("Gridsize rows: ");
+    JLabel gridSizeXLabel = new JLabel("Grid size rows: ");
+    JLabel gridSizeYLabel = new JLabel("Grid size columns: ");
     JTextField gridSizeX = new JTextField();
     JTextField gridSizeY = new JTextField();
     JLabel footerSignature = new JLabel("Ivan & Niklas 2025");
