@@ -12,6 +12,7 @@ public class OneFiveGame {
     private boolean isDemo = false;
     private boolean currentGameWon = false;
     private String username;
+    private int moveCounter = 0;
 
 
     public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY) {
@@ -51,6 +52,7 @@ public class OneFiveGame {
         if (whereToMove != -1) {
             gameBoard.set(whereToMove, numberToMove);
             gameBoard.set(whereWeAreMovingFrom, 0);
+            moveCounter++;
             setIfGameIsWon();
         }
     }
@@ -135,6 +137,10 @@ public class OneFiveGame {
 
     public String getUsername() {
         return username;
+    }
+
+    public int getMoveCounter() {
+        return moveCounter;
     }
 
     public void printGameBoardToTerminal() {
