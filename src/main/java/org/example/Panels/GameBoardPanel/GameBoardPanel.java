@@ -51,7 +51,7 @@ public class GameBoardPanel extends JPanel {
         printGameBoard();
     }
 
-    public void newGame() {
+    private void newGame() {
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         gameBoardPanel.setVisible(true);
@@ -80,7 +80,7 @@ public class GameBoardPanel extends JPanel {
     }
 
 
-    public void printGameBoard() {
+    private void printGameBoard() {
         List<Integer> gameBoard = ofg.getGameBoard();
         for (int i = 0; i < gameBoard.size(); i++) {
             JButton curButton;
@@ -109,7 +109,7 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
-    public void printWinningScreen(){
+    private void printWinningScreen(){
         gameBoardPanel.setVisible(false);
         // sätter en vinstskärm
         add(winningPicture, BorderLayout.CENTER);
