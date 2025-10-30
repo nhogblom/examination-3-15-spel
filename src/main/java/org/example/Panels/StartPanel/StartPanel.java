@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Panels.StartPanel;
+
+import org.example.Panels.StartPanel.startButtonActionListener.startButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,13 +27,14 @@ public class StartPanel extends JPanel {
     optionsPanel.setLayout(new GridLayout(4, 1));
     headerPanel.add(titleLabel);
     optionsPanel.add(startButton);
-    startButton.addActionListener(e->{
-    });
     optionsPanel.add(highscoreButton);
     optionsPanel.add(settingsButton);
     optionsPanel.add(exitButton);
     exitButton.addActionListener(e -> System.exit(0));
     footerPanel.add(footerSignature);
+
+    startButton.addActionListener(new startButtonActionListener(this));
+
 
     }
 

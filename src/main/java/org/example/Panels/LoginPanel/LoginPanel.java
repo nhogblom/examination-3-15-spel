@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Panels.LoginPanel;
+
+import org.example.Panels.LoginPanel.ButtonActionListeners.GoButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +37,10 @@ public class LoginPanel extends JPanel {
         footerPanel.add(goButton);
         footerPanel.add(footerSignature);
         footerSignature.setHorizontalAlignment(JLabel.CENTER);
+
+        goButton.addActionListener(new GoButtonActionListener(this));
+
+
     }
 }
 

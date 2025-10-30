@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Panels.GameBoardPanel;
+
+import org.example.Panels.GameBoardPanel.ButtonActionListeners.NewGameButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +14,9 @@ public class GameBoardPanel extends JPanel {
     JButton newGameButton = new JButton("New Game");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
-    static ArrayList<JButton> gameButtons = new ArrayList<>();
+    public static ArrayList<JButton> gameButtons = new ArrayList<>();
 
-    GameBoardPanel(){
+    public GameBoardPanel(){
         setLayout(new BorderLayout());
         setVisible(true);
 
@@ -63,19 +65,19 @@ public class GameBoardPanel extends JPanel {
         return true;
     }
 
-    protected void createJButtonArrayList(int numberOfGameButtons){
+    public void createJButtonArrayList(int numberOfGameButtons){
         for(int i = 0; i < numberOfGameButtons; i++){
             gameButtons.add(new JButton(String.valueOf(i+1)));
         }
     }
 
-    protected void printGameBoardButtons(ArrayList<JButton> gameButtons){
+    public void printGameBoardButtons(ArrayList<JButton> gameButtons){
         for(JButton button : gameButtons){
             gameBoardPanel.add(button);
         }
     }
 
-    protected ArrayList<JButton> randomizeButtons(ArrayList<JButton> buttons){
+    public ArrayList<JButton> randomizeButtons(ArrayList<JButton> buttons){
          Collections.shuffle(buttons);
          return buttons;
     }
