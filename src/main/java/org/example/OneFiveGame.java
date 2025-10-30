@@ -11,9 +11,11 @@ public class OneFiveGame {
     private int amountOfBoardTiles;
     private boolean isDemo = false;
     private boolean currentGameWon = false;
+    private String username;
 
 
-    public OneFiveGame(int gameBoardSizeX, int gameBoardSizeY) {
+    public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY) {
+        this.username = username;
         this.gameBoardSizeX = gameBoardSizeX;
         this.gameBoardSizeY = gameBoardSizeY;
         this.amountOfBoardTiles = gameBoardSizeX * gameBoardSizeY;
@@ -123,6 +125,17 @@ public class OneFiveGame {
         return gameBoard;
     }
 
+    public int getGameBoardSizeX() {
+        return gameBoardSizeX;
+    }
+
+    public int getGameBoardSizeY() {
+        return gameBoardSizeY;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 
     public void printGameBoardToTerminal() {
         for (int i = 0; i < gameBoardSizeY; i++) {
