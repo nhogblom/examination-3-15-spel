@@ -9,7 +9,7 @@ public class GUI extends JFrame {
 
     JFrame frame = new JFrame();
     LoginPanel loginPanel = new LoginPanel();
-
+    //todo ändra tillbaka när gui spelet är klart
     //endast för test
     GameBoardPanel gameBoardPanel = new GameBoardPanel();
 
@@ -19,6 +19,7 @@ public class GUI extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        //todo ändra tillbaka när gui spelet är klart
         //frame.add(loginPanel);
         //loginPanel.setVisible(true);
         frame.add(gameBoardPanel);
