@@ -18,7 +18,7 @@ public class HighscorePanel extends JPanel {
 
 
 
-    HighscorePanel() {
+    public HighscorePanel() {
 
         ArrayList<Highscore> hlist = new ArrayList<Highscore>();
         //TODO just for testing, remove
