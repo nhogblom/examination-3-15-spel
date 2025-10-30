@@ -29,10 +29,7 @@ public class GameBoardPanel extends JPanel {
         buttonPanel.add(newGameButton);
         newGameButton.addActionListener(new NewGameButtonActionListener(gameBoardPanel));
 
-
         buttonPanel.add(closeButton);
-
-
 
         //Spelet Grid CENTER
         add(gameBoardPanel,BorderLayout.CENTER);
