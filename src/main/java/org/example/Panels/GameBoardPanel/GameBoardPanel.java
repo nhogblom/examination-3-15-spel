@@ -16,6 +16,7 @@ public class GameBoardPanel extends JPanel {
     JPanel gameBoardPanel = new JPanel();
     //todo se till att width och height blir korrekt, orignal bilden är 768x768~
     JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
+    JLabel moveCountLabel = new JLabel();
     public static ArrayList<JButton> gameButtons = new ArrayList<>();
 
 
@@ -31,6 +32,7 @@ public class GameBoardPanel extends JPanel {
 
         //Knappar
         add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(moveCountLabel);
         buttonPanel.add(newGameButton);
         newGameButton.addActionListener(e -> { newGame(); });
         buttonPanel.add(closeButton);
@@ -50,6 +52,7 @@ public class GameBoardPanel extends JPanel {
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         gameBoardPanel.setVisible(true);
+        moveCountLabel.setText("");
         ofg = new OneFiveGame(ofg.getUsername(), ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY());
         printGameBoard();
         gameBoardPanel.revalidate();
@@ -80,6 +83,7 @@ public class GameBoardPanel extends JPanel {
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         printGameBoard();
+        moveCountLabel.setText("Moves: "+ String.valueOf(ofg.getMoveCounter()));
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
         if (ofg.isCurrentGameWon()) {
