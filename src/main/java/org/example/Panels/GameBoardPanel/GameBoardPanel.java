@@ -9,21 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameBoardPanel extends JPanel {
-    // todo ändra så att den tar input från gui för att skapa rätt storlek av spelet.
-//    OneFiveGame ofg = new OneFiveGame(4, 4);
-    OneFiveGame ofg = new OneFiveGame(true);
+    OneFiveGame ofg;
     JLabel welcomeLabel = new JLabel("Welcome to the game");
     JButton closeButton = new JButton("Close");
     JButton newGameButton = new JButton("New Game");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
-    //todo se till att width och height blir korrekt
+    //todo se till att width och height blir korrekt, orignal bilden är 768x768~
     JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
     public static ArrayList<JButton> gameButtons = new ArrayList<>();
 
 
 
-    public GameBoardPanel() {
+    public GameBoardPanel(OneFiveGame ofg) {
+        this.ofg = ofg;
         setLayout(new BorderLayout());
         setVisible(true);
 
@@ -57,7 +56,7 @@ public class GameBoardPanel extends JPanel {
         gameBoardPanel.setVisible(true);
         // todo ändra så att den tar input från gui för att skapa rätt storlek av spelet.
         // todo se även till att användardata så som användarnamn förs vidare till det nya spelet.
-        ofg = new OneFiveGame(2, 2);
+        ofg = new OneFiveGame("användarnamn",2, 2);
         printGameBoard();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
