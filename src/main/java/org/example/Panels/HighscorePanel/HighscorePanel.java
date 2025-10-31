@@ -9,11 +9,8 @@ import java.util.ArrayList;
 
 public class HighscorePanel extends JPanel {
 
-    JPanel labelPanel = new JPanel();
     JLabel highscoreLabel = new JLabel("Highscore");
-    JLabel descriptionLabel = new JLabel("Name \tTurns\ttime");
-
-    JPanel highscorePanel = new JPanel();
+    JTextArea highScoreTextArea = new JTextArea();
 
     JPanel buttonPanel = new JPanel();
     JButton backButton = new JButton("Back");
@@ -36,23 +33,33 @@ public class HighscorePanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        add(labelPanel,BorderLayout.NORTH);
-        labelPanel.setLayout(new GridLayout(2,1));
-        labelPanel.add(highscoreLabel);
-        labelPanel.add(descriptionLabel);
-        highscoreLabel.setHorizontalAlignment(JLabel.CENTER);
-        descriptionLabel.setHorizontalAlignment(JLabel.CENTER);
+        add(highscoreLabel,BorderLayout.NORTH);
+        highscoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        add(highscorePanel,BorderLayout.CENTER);
-        highscorePanel.setLayout(new GridLayout(10,3));
-        //TODO ändra så att det blir antalet size of Highscore objects istället för hårdkod
+        //TODO GÖRA EN TEXT AREA FÖR HIGHSCORE OCH GÖRA DEN TRANSPARENT
+
+        StringBuilder textAreaTextSb = new StringBuilder();
+        textAreaTextSb.append("Name").append("\t".repeat(2))
+                .append("Turns").append("\t".repeat(2))
+                .append("Time").append("\t".repeat(2)).append("\n");
+
         for(Highscore highscore : hlist){
-            highscorePanel.add(new JLabel(highscore.getName() + "\t" + highscore.getTurns()));
+            textAreaTextSb.append(highscore.getName()).append("\t".repeat(2))
+                    .append(highscore.getTurns()).append("\t".repeat(2))
+                    .append("12:30").append("\t".repeat(2)).append("\n");
         }
+
+        highScoreTextArea.setText(textAreaTextSb.toString());
+        highScoreTextArea.setEditable(false);
+        highScoreTextArea.setOpaque(false);
+        highScoreTextArea.setBackground(new Color(0,0,0,0));
+        add(highScoreTextArea,BorderLayout.CENTER);
 
         add(buttonPanel,BorderLayout.SOUTH);
         buttonPanel.add(backButton);
         backButton.addActionListener(new BackButtonActionListener(this));
+
+
 
     }
 
