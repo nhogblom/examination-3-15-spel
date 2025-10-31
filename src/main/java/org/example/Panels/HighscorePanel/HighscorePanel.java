@@ -15,29 +15,15 @@ public class HighscorePanel extends JPanel {
     JPanel buttonPanel = new JPanel();
     JButton backButton = new JButton("Back");
 
-
-
     public HighscorePanel() {
 
-        ArrayList<Highscore> hlist = new ArrayList<Highscore>();
-        //TODO just for testing, remove denna lista borde finnas i OneFiveGame..
-        // Vid vunnet game lägger den till en entry och sedan håller den koll på via serialisering och de serial
-        Highscore h1 = new Highscore("Ivan",10);
-        Highscore h2 = new Highscore("Niklas",5);
-        Highscore h3 = new Highscore("Peter",12);
-        Highscore h4 = new Highscore("Pelle",15);
-        hlist.add(h1);
-        hlist.add(h2);
-        hlist.add(h3);
-        hlist.add(h4);
-
+        ArrayList<Highscore> hlist = Highscore.getHighscoresList();
 
         setLayout(new BorderLayout());
 
         add(highscoreLabel,BorderLayout.NORTH);
         highscoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        //TODO GÖRA EN TEXT AREA FÖR HIGHSCORE OCH GÖRA DEN TRANSPARENT
 
         StringBuilder textAreaTextSb = new StringBuilder();
         textAreaTextSb.append("Name").append("\t".repeat(2))
