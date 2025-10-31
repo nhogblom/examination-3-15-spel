@@ -8,20 +8,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameBoardPanel extends JPanel {
-
-    // todo ändra så att den tar input från gui för att skapa rätt storlek av spelet.
-//    OneFiveGame ofg = new OneFiveGame(4, 4);
-    OneFiveGame ofg = new OneFiveGame(true);
-
+    OneFiveGame ofg;
     JLabel welcomeLabel = new JLabel("Welcome to the game");
     JButton closeButton = new JButton("Close");
     JButton newGameButton = new JButton("New Game");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
-    JLabel winningPicture = new JLabel(new ImageIcon("src/main/resources/win.png"));
+    //todo se till att width och height blir korrekt, orignal bilden är 768x768~
+    JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
+    JLabel moveCountLabel = new JLabel();
     public static ArrayList<JButton> gameButtons = new ArrayList<>();
 
-    public GameBoardPanel() {
+
+
+    public GameBoardPanel(OneFiveGame ofg) {
+        this.ofg = ofg;
         setLayout(new BorderLayout());
         setVisible(true);
 
@@ -31,97 +32,75 @@ public class GameBoardPanel extends JPanel {
 
         //Knappar
         add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(moveCountLabel);
         buttonPanel.add(newGameButton);
-        // ändrade från listener class till lambda
-//        newGameButton.addActionListener(new NewGameButtonActionListener(gameBoardPanel));
-        newGameButton.addActionListener(e -> {
-            newGame();
-        });
-
-
+        newGameButton.addActionListener(e -> { newGame(); });
         buttonPanel.add(closeButton);
-        closeButton.addActionListener(e -> {
-            System.exit(0);
-        });
-
+        closeButton.addActionListener(e -> {System.exit(0);});
 
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
 
 
+        gameBoardPanel.setLayout(new GridLayout(ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY()));
 
-
-//        gameBoardPanel.setLayout(new GridLayout(4, 4));
-        gameBoardPanel.setLayout(new GridLayout(2, 2));
-
-        //Skapar spel knappar, randomizear dom och skriver ut.
-        //TODO storleken ska komma från input i Login Panel sen.
-
-        //createJButtonArrayList(15);
-
-        printGameBoardButtons();
-//        IO.println("Arrayer är lika (spelet är vunnet) = " + checkIfGameIsWon(gameButtons));
-
-
+        // display game
+        printGameBoard();
     }
 
-    public void newGame() {
+    private void newGame() {
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         gameBoardPanel.setVisible(true);
-        // todo ändra så att den tar input från gui för att skapa rätt storlek av spelet.
-        ofg = new OneFiveGame(2, 2);
-        printGameBoardButtons();
+        moveCountLabel.setText("");
+        ofg = new OneFiveGame(ofg.getUsername(), ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY());
+        printGameBoard();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
     }
 
-    private boolean checkIfGameIsWon(ArrayList<JButton> gameButtons) {
-        //TODO storleken ska komma från input i Login Panel.
-        ArrayList<JButton> gameIsWonGameButtonsSort = new ArrayList<>();
-        for (int i = 0; i < gameButtons.size(); i++) {
-            gameIsWonGameButtonsSort.add(new JButton(String.valueOf(i + 1)));
-        }
-        int index = 0;
-        for (JButton button : gameIsWonGameButtonsSort) {
-            if (!(button.getText().equals(gameButtons.get(index).getText()))) {
-                return false;
-            }
-            index++;
-        }
-        return true;
-    }
 
 
-    public void printGameBoardButtons() {
+    private void printGameBoard() {
         List<Integer> gameBoard = ofg.getGameBoard();
         for (int i = 0; i < gameBoard.size(); i++) {
-            JButton curButton = new JButton(String.valueOf(gameBoard.get(i)));
-            if (!ofg.isCurrentGameWon()) {
+            JButton curButton;
+            if (gameBoard.get(i) == 0) {
+                curButton = new JButton("");
+            }else {
+                curButton = new JButton(String.valueOf(gameBoard.get(i)));
                 curButton.addActionListener(e -> {
                     moveAndRepaint(Integer.parseInt(curButton.getText()));
                 });
-            }else{
-                gameBoardPanel.setVisible(false);
-                // sätter en vinstskärm
-                add(winningPicture, BorderLayout.CENTER);
-                winningPicture.setVisible(true);
-
             }
             gameBoardPanel.add(curButton);
         }
     }
 
+
     private void moveAndRepaint(int number) {
         ofg.move(number);
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
-        printGameBoardButtons();
+        printGameBoard();
+        moveCountLabel.setText("Moves: "+ String.valueOf(ofg.getMoveCounter()));
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
         if (ofg.isCurrentGameWon()) {
-            System.out.println("GAME IS WON");
+            printWinningScreen();
         }
     }
 
+    private void printWinningScreen(){
+        //todo här kan vi lägga till vinster med mera till highscore~
+        gameBoardPanel.setVisible(false);
+        // sätter en vinstskärm
+        add(winningPicture, BorderLayout.CENTER);
+        winningPicture.setVisible(true);
+        revalidate();
+        repaint();
+        //todo ta bort denna och inkludera istället getMoveCounter till lagring av highscore~
+        // testar move counter
+        System.out.println("Du vann på "+ofg.getMoveCounter()+" steg.");
+    }
 }
