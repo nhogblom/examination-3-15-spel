@@ -1,10 +1,13 @@
 package org.example.Panels.LoginPanel;
 
 import org.example.Enums.Difficulty;
+import org.example.OneFiveGame;
+import org.example.Panels.GameBoardPanel.GameBoardPanel;
 import org.example.Panels.LoginPanel.ButtonActionListeners.GoButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel {
     JPanel inputPanel = new JPanel();
@@ -24,14 +27,9 @@ public class LoginPanel extends JPanel {
         setLayout(new GridLayout(5,1));
         setVisible(true);
 
-//        add(headerPanel,BorderLayout.NORTH);
-
         difficultyButtonPanel.setLayout(new GridLayout(1, 3));
-
         titleLabel.setHorizontalAlignment(JLabel.CENTER);
         add(titleLabel);
-
-
         add(inputPanel);
         inputPanel.setLayout(new GridLayout(1,2));
         inputPanel.add(usernameLabel);
@@ -40,17 +38,40 @@ public class LoginPanel extends JPanel {
         difficultyButtonPanel.add(easyDifficultyButton);
         difficultyButtonPanel.add(MediumDifficultyButton);
         difficultyButtonPanel.add(HardDifficultyButton);
-
         add(footerPanel);
         footerPanel.add(footerSignature);
         footerSignature.setHorizontalAlignment(JLabel.CENTER);
 
-//        goButton.addActionListener(new GoButtonActionListener(this,usernameField,gridSizeX,gridSizeY));
+        ActionListener difficultyButtonListener = e -> {
+            JButton clickedButton = (JButton) e.getSource();
+            difficultyButtonActionPerformed(usernameField.getText(),clickedButton.getText());
+        };
+
+        easyDifficultyButton.addActionListener(difficultyButtonListener);
+        MediumDifficultyButton.addActionListener(difficultyButtonListener);
+        HardDifficultyButton.addActionListener(difficultyButtonListener);
+
+
+
     }
 
-    private void difficultyButtonActionPerformed(){
+    private void difficultyButtonActionPerformed(String username, String difficulty) {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        OneFiveGame ofg;
 
-    }
+        if(difficulty.equals(Difficulty.EASY.getDescription())){
+            ofg = new OneFiveGame(username, Difficulty.EASY.getxRows(), Difficulty.EASY.getyRows());
+        }else if(difficulty.equals(Difficulty.MEDIUM.getDescription())){
+            ofg = new OneFiveGame(username,Difficulty.MEDIUM.getxRows(), Difficulty.MEDIUM.getyRows());
+        }else {
+            ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows());
+        }
+            setVisible(false);
+            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
+            frame.add(gameBoardPanel);
+            frame.revalidate();
+            frame.repaint();
+        }
 
 }
 
