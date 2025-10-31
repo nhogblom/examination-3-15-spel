@@ -1,4 +1,4 @@
-package org.example.Panels.StartPanel.startButtonActionListener;
+package org.example.Panels.StartPanel.ButtonActionListener;
 
 
 import org.example.Panels.LoginPanel.LoginPanel;

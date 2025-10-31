@@ -1,6 +1,7 @@
 package org.example.Panels.StartPanel;
 
-import org.example.Panels.StartPanel.startButtonActionListener.startButtonActionListener;
+import org.example.Panels.StartPanel.ButtonActionListener.HighscoreButtonActionListener;
+import org.example.Panels.StartPanel.ButtonActionListener.startButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +35,7 @@ public class StartPanel extends JPanel {
     footerPanel.add(footerSignature);
 
     startButton.addActionListener(new startButtonActionListener(this));
+    highscoreButton.addActionListener(new HighscoreButtonActionListener(this));
 
 
     }
