@@ -1,6 +1,9 @@
 package org.example.Panels.GameBoardPanel;
 
+import org.example.GUI;
 import org.example.OneFiveGame;
+import org.example.Panels.HighscorePanel.Highscore;
+import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,11 +21,12 @@ public class GameBoardPanel extends JPanel {
     JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
     JLabel moveCountLabel = new JLabel();
     public static ArrayList<JButton> gameButtons = new ArrayList<>();
+    GUI gui;
 
 
-
-    public GameBoardPanel(OneFiveGame ofg) {
+    public GameBoardPanel(OneFiveGame ofg, GUI gui) {
         this.ofg = ofg;
+        this.gui = gui;
         setLayout(new BorderLayout());
         setVisible(true);
 
@@ -36,7 +40,8 @@ public class GameBoardPanel extends JPanel {
         buttonPanel.add(newGameButton);
         newGameButton.addActionListener(e -> { newGame(); });
         buttonPanel.add(closeButton);
-        closeButton.addActionListener(e -> {System.exit(0);});
+
+      closeButton.addActionListener(e -> gui.closeProgram());
 
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
@@ -91,8 +96,14 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
+    private void addNewHighScore(){
+        //TODO här kan man lägga till kontroll ifall det är ny Highscore
+        new Highscore(ofg.getUsername(),ofg.getMoveCounter());
+    }
+
     private void printWinningScreen(){
         //todo här kan vi lägga till vinster med mera till highscore~
+        addNewHighScore();
         gameBoardPanel.setVisible(false);
         // sätter en vinstskärm
         add(winningPicture, BorderLayout.CENTER);

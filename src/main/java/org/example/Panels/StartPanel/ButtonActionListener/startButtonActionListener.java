@@ -1,7 +1,9 @@
 package org.example.Panels.StartPanel.ButtonActionListener;
 
 
+import org.example.GUI;
 import org.example.Panels.LoginPanel.LoginPanel;
+import org.example.Panels.StartPanel.StartPanel;
 
 
 import javax.swing.*;
@@ -10,17 +12,19 @@ import java.awt.event.ActionListener;
 
 public class startButtonActionListener implements ActionListener {
     JPanel startPanel;
+    GUI gui;
 
-    public startButtonActionListener(JPanel startPanel) {
+    public startButtonActionListener(JPanel startPanel, GUI gui) {
         this.startPanel = startPanel;
+        this.gui = gui;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(startPanel);
-        startPanel.setVisible(false);
-        LoginPanel loginPanel = new LoginPanel();
+        LoginPanel loginPanel = new LoginPanel(gui);
         frame.add(loginPanel);
+        frame.setContentPane(loginPanel);
         frame.revalidate();
         frame.repaint();
     }

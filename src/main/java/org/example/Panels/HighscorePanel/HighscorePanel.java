@@ -9,35 +9,22 @@ import java.util.ArrayList;
 
 public class HighscorePanel extends JPanel {
 
+    JPanel previousPanel;
     JLabel highscoreLabel = new JLabel("Highscore");
     JTextArea highScoreTextArea = new JTextArea();
 
     JPanel buttonPanel = new JPanel();
     JButton backButton = new JButton("Back");
 
-
-
-    public HighscorePanel() {
-
-        ArrayList<Highscore> hlist = new ArrayList<Highscore>();
-        //TODO just for testing, remove denna lista borde finnas i OneFiveGame..
-        // Vid vunnet game lägger den till en entry och sedan håller den koll på via serialisering och de serial
-        Highscore h1 = new Highscore("Ivan",10);
-        Highscore h2 = new Highscore("Niklas",5);
-        Highscore h3 = new Highscore("Peter",12);
-        Highscore h4 = new Highscore("Pelle",15);
-        hlist.add(h1);
-        hlist.add(h2);
-        hlist.add(h3);
-        hlist.add(h4);
-
+    public HighscorePanel(JPanel previousPanel) {
+        this.previousPanel = previousPanel;
+        ArrayList<Highscore> hlist = Highscore.getHighscoresList();
 
         setLayout(new BorderLayout());
 
         add(highscoreLabel,BorderLayout.NORTH);
         highscoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        //TODO GÖRA EN TEXT AREA FÖR HIGHSCORE OCH GÖRA DEN TRANSPARENT
 
         StringBuilder textAreaTextSb = new StringBuilder();
         textAreaTextSb.append("Name").append("\t".repeat(2))
@@ -50,7 +37,6 @@ public class HighscorePanel extends JPanel {
                     .append("12:30").append("\t".repeat(2)).append("\n");
         }
 
-
         highScoreTextArea.setText(textAreaTextSb.toString());
         highScoreTextArea.setEditable(false);
         highScoreTextArea.setOpaque(false);
@@ -59,9 +45,7 @@ public class HighscorePanel extends JPanel {
 
         add(buttonPanel,BorderLayout.SOUTH);
         buttonPanel.add(backButton);
-        backButton.addActionListener(new BackButtonActionListener(this));
-
-
+        backButton.addActionListener(new BackButtonActionListener(this.previousPanel));
 
     }
 
