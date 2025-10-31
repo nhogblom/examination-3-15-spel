@@ -16,7 +16,6 @@ public class Highscore {
     public Highscore(String name, int turns) {
         this.name = name;
         this.turns = turns;
-        //TODO check if highscore is in top 10, add if YES, throw away if NO
         highscoresList.add(new Highscore(name, turns));
     }
 

@@ -1,6 +1,7 @@
 package org.example.Panels.GameBoardPanel;
 
 import org.example.OneFiveGame;
+import org.example.Panels.HighscorePanel.Highscore;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,8 +92,14 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
+    private void addNewHighScore(){
+        //TODO här kan man lägga till kontroll ifall det är ny Highscore
+        new Highscore(ofg.getUsername(),ofg.getMoveCounter());
+    }
+
     private void printWinningScreen(){
         //todo här kan vi lägga till vinster med mera till highscore~
+        addNewHighScore();
         gameBoardPanel.setVisible(false);
         // sätter en vinstskärm
         add(winningPicture, BorderLayout.CENTER);
