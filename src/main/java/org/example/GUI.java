@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 public class GUI extends JFrame {
     JFrame frame = new JFrame();
     StartPanel StartPanel = new StartPanel();
-    Serialization serializeClass;
+    Serialization serializeClass = new Serialization();
 
     GUI() {
         frame.setSize(500, 500);
@@ -20,6 +20,8 @@ public class GUI extends JFrame {
         frame.setVisible(true);
         frame.add(StartPanel);
         StartPanel.setVisible(true);
+
+        serializeClass.deserialize("highscores.txt");
 
         frame.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e){

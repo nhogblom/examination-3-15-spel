@@ -1,9 +1,10 @@
 package org.example.Panels.HighscorePanel;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
 
-public class Highscore {
+public class Highscore implements Serializable {
 
     private String name;
     private int turns;
