@@ -15,7 +15,7 @@ public class GUI extends JFrame {
 
     GUI() {
         frame.setSize(500, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.add(StartPanel);
@@ -25,10 +25,14 @@ public class GUI extends JFrame {
 
         frame.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e){
-                serializeClass.Serialize();
+                closeProgram();
             }
         });
     }
 
+    public void closeProgram(){
+        serializeClass.Serialize();
+        System.exit(0);
+    }
 
 }
