@@ -1,47 +1,77 @@
 package org.example.Panels.LoginPanel;
 
+import org.example.Enums.Difficulty;
+import org.example.OneFiveGame;
+import org.example.Panels.GameBoardPanel.GameBoardPanel;
 import org.example.Panels.LoginPanel.ButtonActionListeners.GoButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel {
-    JPanel headerPanel = new JPanel();
     JPanel inputPanel = new JPanel();
     JPanel footerPanel = new JPanel();
     JLabel titleLabel = new JLabel("<html><h1>Starting up a new game!</h1></html>");
     JLabel usernameLabel = new JLabel("Enter your username:");
-    JTextField usernameField = new JTextField();
-    JLabel gridSizeXLabel = new JLabel("Grid size rows: ");
-    JLabel gridSizeYLabel = new JLabel("Grid size columns: ");
-    JTextField gridSizeX = new JTextField();
-    JTextField gridSizeY = new JTextField();
+    JTextField usernameField = new JTextField(15);
     JLabel footerSignature = new JLabel("Ivan & Niklas 2025");
-    JButton goButton = new JButton("Go");
+
+    JPanel difficultyButtonPanel = new JPanel();
+    JButton easyDifficultyButton = new JButton(Difficulty.EASY.getDescription());
+    JButton MediumDifficultyButton = new JButton(Difficulty.MEDIUM.getDescription());
+    JButton HardDifficultyButton = new JButton(Difficulty.HARD.getDescription());
 
 
     public LoginPanel() {
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(5,1));
         setVisible(true);
-        add(headerPanel,BorderLayout.NORTH);
-        add(inputPanel,BorderLayout.CENTER);
-        add(footerPanel,BorderLayout.SOUTH);
-        headerPanel.add(titleLabel);
-        inputPanel.setLayout(new GridLayout(4,2));
+
+        difficultyButtonPanel.setLayout(new GridLayout(1, 3));
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        add(titleLabel);
+        add(inputPanel);
+        inputPanel.setLayout(new GridLayout(1,2));
         inputPanel.add(usernameLabel);
         inputPanel.add(usernameField);
-        inputPanel.add(gridSizeXLabel);
-        inputPanel.add(gridSizeX);
-        inputPanel.add(gridSizeYLabel);
-        inputPanel.add(gridSizeY);
-        footerPanel.setLayout(new GridLayout(2,1));
-        footerPanel.add(goButton);
+        add(difficultyButtonPanel);
+        difficultyButtonPanel.add(easyDifficultyButton);
+        difficultyButtonPanel.add(MediumDifficultyButton);
+        difficultyButtonPanel.add(HardDifficultyButton);
+        add(footerPanel);
         footerPanel.add(footerSignature);
         footerSignature.setHorizontalAlignment(JLabel.CENTER);
 
-        goButton.addActionListener(new GoButtonActionListener(this,usernameField,gridSizeX,gridSizeY));
+        ActionListener difficultyButtonListener = e -> {
+            JButton clickedButton = (JButton) e.getSource();
+            difficultyButtonActionPerformed(usernameField.getText(),clickedButton.getText());
+        };
+
+        easyDifficultyButton.addActionListener(difficultyButtonListener);
+        MediumDifficultyButton.addActionListener(difficultyButtonListener);
+        HardDifficultyButton.addActionListener(difficultyButtonListener);
+
 
 
     }
+
+    private void difficultyButtonActionPerformed(String username, String difficulty) {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        OneFiveGame ofg;
+
+        if(difficulty.equals(Difficulty.EASY.getDescription())){
+            ofg = new OneFiveGame(username, Difficulty.EASY.getxRows(), Difficulty.EASY.getyRows());
+        }else if(difficulty.equals(Difficulty.MEDIUM.getDescription())){
+            ofg = new OneFiveGame(username,Difficulty.MEDIUM.getxRows(), Difficulty.MEDIUM.getyRows());
+        }else {
+            ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows());
+        }
+            setVisible(false);
+            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
+            frame.add(gameBoardPanel);
+            frame.revalidate();
+            frame.repaint();
+        }
+
 }
 
