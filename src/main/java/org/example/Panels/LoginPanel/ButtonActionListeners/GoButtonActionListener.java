@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+//TODO remove class, not used.
 public class GoButtonActionListener implements ActionListener {
     JPanel jp;
     JTextField username;
@@ -35,11 +37,11 @@ public class GoButtonActionListener implements ActionListener {
 
             this.ofg = new OneFiveGame(userNameString, gridSizeXInt, gridSizeYInt);
             jp.setVisible(false);
-
-            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
-            frame.add(gameBoardPanel);
-            frame.revalidate();
-            frame.repaint();
+//
+////            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
+//            frame.add(gameBoardPanel);
+//            frame.revalidate();
+//            frame.repaint();
         }
         catch (Exception error) {
             //doing nothing

@@ -9,8 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class GUI extends JFrame {
+
     JFrame frame = new JFrame();
-    StartPanel StartPanel = new StartPanel();
+    StartPanel StartPanel = new StartPanel(this);
     Serialization serializeClass = new Serialization();
 
     GUI() {
@@ -31,6 +32,7 @@ public class GUI extends JFrame {
     }
 
     public void closeProgram(){
+        IO.println("Closing program...");
         serializeClass.Serialize();
         System.exit(0);
     }

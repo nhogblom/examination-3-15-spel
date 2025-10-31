@@ -9,14 +9,15 @@ import java.util.ArrayList;
 
 public class HighscorePanel extends JPanel {
 
+    JPanel previousPanel;
     JLabel highscoreLabel = new JLabel("Highscore");
     JTextArea highScoreTextArea = new JTextArea();
 
     JPanel buttonPanel = new JPanel();
     JButton backButton = new JButton("Back");
 
-    public HighscorePanel() {
-
+    public HighscorePanel(JPanel previousPanel) {
+        this.previousPanel = previousPanel;
         ArrayList<Highscore> hlist = Highscore.getHighscoresList();
 
         setLayout(new BorderLayout());
@@ -36,7 +37,6 @@ public class HighscorePanel extends JPanel {
                     .append("12:30").append("\t".repeat(2)).append("\n");
         }
 
-
         highScoreTextArea.setText(textAreaTextSb.toString());
         highScoreTextArea.setEditable(false);
         highScoreTextArea.setOpaque(false);
@@ -45,9 +45,7 @@ public class HighscorePanel extends JPanel {
 
         add(buttonPanel,BorderLayout.SOUTH);
         buttonPanel.add(backButton);
-        backButton.addActionListener(new BackButtonActionListener(this));
-
-
+        backButton.addActionListener(new BackButtonActionListener(this.previousPanel));
 
     }
 

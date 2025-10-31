@@ -16,9 +16,8 @@ public class HighscoreButtonActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(startPanel);
-        frame.remove(startPanel);
-        HighscorePanel highscorePanel = new HighscorePanel();
-        frame.add(highscorePanel);
+        HighscorePanel highscorePanel = new HighscorePanel(startPanel);
+        frame.setContentPane(highscorePanel);
         frame.revalidate();
         frame.repaint();
 

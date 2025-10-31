@@ -1,15 +1,18 @@
 package org.example.Panels.LoginPanel;
 
 import org.example.Enums.Difficulty;
+import org.example.GUI;
 import org.example.OneFiveGame;
 import org.example.Panels.GameBoardPanel.GameBoardPanel;
 import org.example.Panels.LoginPanel.ButtonActionListeners.GoButtonActionListener;
+import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class LoginPanel extends JPanel {
+    GUI gui;
     JPanel inputPanel = new JPanel();
     JPanel footerPanel = new JPanel();
     JLabel titleLabel = new JLabel("<html><h1>Starting up a new game!</h1></html>");
@@ -23,7 +26,8 @@ public class LoginPanel extends JPanel {
     JButton HardDifficultyButton = new JButton(Difficulty.HARD.getDescription());
 
 
-    public LoginPanel() {
+    public LoginPanel(GUI gui) {
+        this.gui = gui;
         setLayout(new GridLayout(5,1));
         setVisible(true);
 
@@ -51,8 +55,6 @@ public class LoginPanel extends JPanel {
         MediumDifficultyButton.addActionListener(difficultyButtonListener);
         HardDifficultyButton.addActionListener(difficultyButtonListener);
 
-
-
     }
 
     private void difficultyButtonActionPerformed(String username, String difficulty) {
@@ -66,9 +68,9 @@ public class LoginPanel extends JPanel {
         }else {
             ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows());
         }
-            setVisible(false);
-            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);
+            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg, gui);
             frame.add(gameBoardPanel);
+            frame.setContentPane(gameBoardPanel);
             frame.revalidate();
             frame.repaint();
         }

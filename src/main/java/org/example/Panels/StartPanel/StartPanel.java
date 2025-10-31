@@ -1,5 +1,6 @@
 package org.example.Panels.StartPanel;
 
+import org.example.GUI;
 import org.example.Panels.StartPanel.ButtonActionListener.HighscoreButtonActionListener;
 import org.example.Panels.StartPanel.ButtonActionListener.startButtonActionListener;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StartPanel extends JPanel {
+    GUI gui;
     JPanel headerPanel = new JPanel();
     JPanel optionsPanel = new JPanel();
     JPanel footerPanel = new JPanel();
@@ -18,7 +20,8 @@ public class StartPanel extends JPanel {
     JLabel footerSignature = new JLabel("Ivan & Niklas 2025");
 
 
-    public StartPanel() {
+    public StartPanel(GUI gui) {
+    this.gui = gui;
     setLayout(new BorderLayout());
     setVisible(true);
     add(headerPanel,BorderLayout.NORTH);
@@ -31,14 +34,19 @@ public class StartPanel extends JPanel {
     optionsPanel.add(highscoreButton);
     optionsPanel.add(settingsButton);
     optionsPanel.add(exitButton);
-    exitButton.addActionListener(e -> System.exit(0));
+    exitButton.addActionListener(e -> gui.closeProgram());
     footerPanel.add(footerSignature);
 
-    startButton.addActionListener(new startButtonActionListener(this));
+    startButton.addActionListener(new startButtonActionListener(this,gui));
     highscoreButton.addActionListener(new HighscoreButtonActionListener(this));
-
 
     }
 
+    public GUI getGui() {
+        return gui;
+    }
 
+    public void setGui(GUI gui) {
+        this.gui = gui;
+    }
 }
