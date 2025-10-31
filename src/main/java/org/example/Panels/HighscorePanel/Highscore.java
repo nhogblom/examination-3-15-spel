@@ -1,11 +1,13 @@
 package org.example.Panels.HighscorePanel;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Highscore {
 
     private String name;
     private int turns;
+    private static ArrayList<Highscore> highscoresList = new ArrayList<>();
 
     public Highscore() {}
 
@@ -14,6 +16,8 @@ public class Highscore {
     public Highscore(String name, int turns) {
         this.name = name;
         this.turns = turns;
+        //TODO check if highscore is in top 10, add if YES, throw away if NO
+        highscoresList.add(new Highscore(name, turns));
     }
 
     public String getName() {
