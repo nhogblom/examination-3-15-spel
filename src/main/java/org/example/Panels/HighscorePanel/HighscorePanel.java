@@ -20,7 +20,8 @@ public class HighscorePanel extends JPanel {
     public HighscorePanel() {
 
         ArrayList<Highscore> hlist = new ArrayList<Highscore>();
-        //TODO just for testing, remove
+        //TODO just for testing, remove denna lista borde finnas i OneFiveGame..
+        // Vid vunnet game lägger den till en entry och sedan håller den koll på via serialisering och de serial
         Highscore h1 = new Highscore("Ivan",10);
         Highscore h2 = new Highscore("Niklas",5);
         Highscore h3 = new Highscore("Peter",12);
@@ -48,6 +49,7 @@ public class HighscorePanel extends JPanel {
                     .append(highscore.getTurns()).append("\t".repeat(2))
                     .append("12:30").append("\t".repeat(2)).append("\n");
         }
+
 
         highScoreTextArea.setText(textAreaTextSb.toString());
         highScoreTextArea.setEditable(false);
