@@ -1,13 +1,17 @@
 package org.example;
 
 
+import org.example.FileOperations.Serialization;
 import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GUI extends JFrame {
     JFrame frame = new JFrame();
     StartPanel StartPanel = new StartPanel();
+    Serialization serializeClass;
 
     GUI() {
         frame.setSize(500, 500);
@@ -16,5 +20,13 @@ public class GUI extends JFrame {
         frame.setVisible(true);
         frame.add(StartPanel);
         StartPanel.setVisible(true);
+
+        frame.addWindowListener(new WindowAdapter(){
+            public void windowClosing(WindowEvent e){
+                serializeClass.Serialize();
+            }
+        });
     }
+
+
 }

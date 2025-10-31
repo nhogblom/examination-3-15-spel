@@ -1,9 +1,8 @@
-package org.example.fileOperations;
+package org.example.FileOperations;
 
 import org.example.Panels.HighscorePanel.Highscore;
 
 import java.io.*;
-import java.nio.file.NoSuchFileException;
 import java.util.ArrayList;
 
 public class Serialization{
