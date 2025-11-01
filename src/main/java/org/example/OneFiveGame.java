@@ -42,8 +42,11 @@ public class OneFiveGame {
             for (int i = 0; i < amountOfBoardTiles; i++) {
                 gameBoard.add(i);
             }
-            Collections.shuffle(gameBoard);
+            do {
+                Collections.shuffle(gameBoard);
+            }while (!isSolvable(gameBoard));
         }
+        System.out.println(isSolvable(gameBoard));
     }
 
     public void move(int numberToMove) {
@@ -158,4 +161,32 @@ public class OneFiveGame {
         move(tokenToMoveInt);
     }
 
+    private boolean isSolvable(List<Integer> gameBoard) {
+        int inversions = 0;
+        boolean evenColumns = gameBoardSizeX % 2 == 0;
+        int rowOfZeroFromTheBottom = gameBoardSizeY - (gameBoard.indexOf(0) / gameBoardSizeX);
+        boolean zeroIsOnAUnevenRowFromTheBottom = rowOfZeroFromTheBottom % 2 == 1;
+
+        // räkna antalet inversions
+        for (int i = 0; i < gameBoard.size(); i++) {
+            for (int j = i + 1; j < gameBoard.size(); j++) {
+                if (gameBoard.get(i) != 0 && gameBoard.get(j) != 0 && gameBoard.get(i) > gameBoard.get(j)) {
+                    inversions++;
+                }
+            }
+        }
+
+        // beroende på spelets antal av kolumner samt position av 0 samt antalet av inversions kontrollera om spelet är lösbart~
+        boolean inversionsEven = inversions % 2 == 0;
+        if (!evenColumns && inversionsEven) {
+            return true;
+        } else if (evenColumns && zeroIsOnAUnevenRowFromTheBottom && inversionsEven) {
+            return true;
+        } else if (evenColumns && !zeroIsOnAUnevenRowFromTheBottom && !inversionsEven) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+
