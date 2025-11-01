@@ -103,7 +103,9 @@ public class GameBoardPanel extends JPanel {
 
     private void addNewHighScore() {
         //TODO här kan man lägga till kontroll ifall det är ny Highscore
-        new Highscore(ofg.getUsername(), ofg.getMoveCounter());
+        if (!ofg.getUsername().equals("Demo")){
+            new Highscore(ofg.getUsername(), ofg.getMoveCounter());
+        }
     }
 
     private void printWinningScreen() {
