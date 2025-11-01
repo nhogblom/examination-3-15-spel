@@ -1,8 +1,8 @@
 package org.example;
 
 
-import org.example.FileOperations.Serialization;
-import org.example.Panels.StartPanel.StartPanel;
+import org.example.fileOperations.Serialization;
+import org.example.Panels.startPanel.StartPanel;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;

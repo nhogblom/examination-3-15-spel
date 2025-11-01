@@ -1,4 +1,4 @@
-package org.example.FileOperations;
+package org.example.fileOperations;
 
 import org.example.Panels.HighscorePanel.Highscore;
 

@@ -1,9 +1,8 @@
-package org.example.Panels.StartPanel.ButtonActionListener;
+package org.example.Panels.startPanel.buttonActionListener;
 
 
 import org.example.GUI;
-import org.example.Panels.LoginPanel.LoginPanel;
-import org.example.Panels.StartPanel.StartPanel;
+import org.example.Panels.loginPanel.LoginPanel;
 
 
 import javax.swing.*;

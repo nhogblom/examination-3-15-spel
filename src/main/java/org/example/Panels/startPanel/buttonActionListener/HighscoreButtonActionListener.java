@@ -1,4 +1,4 @@
-package org.example.Panels.StartPanel.ButtonActionListener;
+package org.example.Panels.startPanel.buttonActionListener;
 
 import org.example.Panels.HighscorePanel.HighscorePanel;
 

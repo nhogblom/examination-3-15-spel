@@ -1,4 +1,4 @@
-package org.example.Panels.GameBoardPanel;
+package org.example.Panels.gameBoardPanel;
 
 import org.example.GUI;
 import org.example.OneFiveGame;

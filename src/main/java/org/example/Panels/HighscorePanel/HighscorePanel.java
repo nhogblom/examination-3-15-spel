@@ -1,10 +1,9 @@
 package org.example.Panels.HighscorePanel;
 
-import org.example.Panels.HighscorePanel.ButtonActionListener.BackButtonActionListener;
+import org.example.Panels.HighscorePanel.buttonActionListener.BackButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class HighscorePanel extends JPanel {

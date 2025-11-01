@@ -1,11 +1,9 @@
-package org.example.Panels.LoginPanel;
+package org.example.Panels.loginPanel;
 
-import org.example.Enums.Difficulty;
+import org.example.enums.Difficulty;
 import org.example.GUI;
 import org.example.OneFiveGame;
-import org.example.Panels.GameBoardPanel.GameBoardPanel;
-import org.example.Panels.LoginPanel.ButtonActionListeners.GoButtonActionListener;
-import org.example.Panels.StartPanel.StartPanel;
+import org.example.Panels.gameBoardPanel.GameBoardPanel;
 
 import javax.swing.*;
 import java.awt.*;

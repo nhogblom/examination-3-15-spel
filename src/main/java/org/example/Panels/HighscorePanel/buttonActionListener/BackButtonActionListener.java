@@ -1,6 +1,4 @@
-package org.example.Panels.HighscorePanel.ButtonActionListener;
-
-import org.example.Panels.StartPanel.StartPanel;
+package org.example.Panels.HighscorePanel.buttonActionListener;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

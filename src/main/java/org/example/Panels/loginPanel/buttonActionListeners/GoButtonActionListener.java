@@ -1,7 +1,6 @@
-package org.example.Panels.LoginPanel.ButtonActionListeners;
+package org.example.Panels.loginPanel.buttonActionListeners;
 
 import org.example.OneFiveGame;
-import org.example.Panels.GameBoardPanel.GameBoardPanel;
 
 
 import javax.swing.*;
