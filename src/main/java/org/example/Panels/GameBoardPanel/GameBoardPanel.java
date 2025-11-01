@@ -142,7 +142,7 @@ public class GameBoardPanel extends JPanel {
 
             ticks[0]++;
 
-            // När vi nått max, stoppa timern
+            // När vi nått max, stoppa timern och byt skärm till vinstskärmen.
             if (ticks[0] >= maxTicks) {
                 ((Timer) e.getSource()).stop();
                 printWinningScreen();
