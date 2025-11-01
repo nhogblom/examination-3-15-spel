@@ -9,6 +9,7 @@ public class Highscore implements Serializable {
     private String name;
     private int turns;
     private static ArrayList<Highscore> highscoresList = new ArrayList<>();
+    private int gameSize;
 
     public Highscore() {}
 
@@ -17,6 +18,7 @@ public class Highscore implements Serializable {
     public Highscore(String name, int turns) {
         this.name = name;
         this.turns = turns;
+
         highscoresList.add(this);
     }
 

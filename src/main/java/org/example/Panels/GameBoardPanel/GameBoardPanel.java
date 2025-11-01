@@ -3,12 +3,12 @@ package org.example.Panels.GameBoardPanel;
 import org.example.GUI;
 import org.example.OneFiveGame;
 import org.example.Panels.HighscorePanel.Highscore;
-import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameBoardPanel extends JPanel {
     OneFiveGame ofg;
@@ -38,10 +38,12 @@ public class GameBoardPanel extends JPanel {
         add(buttonPanel, BorderLayout.SOUTH);
         buttonPanel.add(moveCountLabel);
         buttonPanel.add(newGameButton);
-        newGameButton.addActionListener(e -> { newGame(); });
+        newGameButton.addActionListener(e -> {
+            newGame();
+        });
         buttonPanel.add(closeButton);
 
-      closeButton.addActionListener(e -> gui.closeProgram());
+        closeButton.addActionListener(e -> gui.closeProgram());
 
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
@@ -65,44 +67,49 @@ public class GameBoardPanel extends JPanel {
     }
 
 
-
     private void printGameBoard() {
         List<Integer> gameBoard = ofg.getGameBoard();
         for (int i = 0; i < gameBoard.size(); i++) {
             JButton curButton;
             if (gameBoard.get(i) == 0) {
                 curButton = new JButton("");
-            }else {
+            } else {
                 curButton = new JButton(String.valueOf(gameBoard.get(i)));
-                curButton.addActionListener(e -> {
-                    moveAndRepaint(Integer.parseInt(curButton.getText()));
-                });
+                if (!ofg.isCurrentGameWon()) {
+                    curButton.addActionListener(e -> {
+                        moveAndRepaint(Integer.parseInt(curButton.getText()));
+                    });
+                }
             }
+            gameButtons.add(curButton);
             gameBoardPanel.add(curButton);
         }
     }
 
 
     private void moveAndRepaint(int number) {
+
         ofg.move(number);
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         printGameBoard();
-        moveCountLabel.setText("Moves: "+ String.valueOf(ofg.getMoveCounter()));
+        moveCountLabel.setText("Moves: " + String.valueOf(ofg.getMoveCounter()));
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
         if (ofg.isCurrentGameWon()) {
-            printWinningScreen();
+            partyColorCelebration();
         }
     }
 
-    private void addNewHighScore(){
+    private void addNewHighScore() {
         //TODO här kan man lägga till kontroll ifall det är ny Highscore
-        new Highscore(ofg.getUsername(),ofg.getMoveCounter());
+        new Highscore(ofg.getUsername(), ofg.getMoveCounter());
     }
 
-    private void printWinningScreen(){
+    private void printWinningScreen() {
         //todo här kan vi lägga till vinster med mera till highscore~
+
+
         addNewHighScore();
         gameBoardPanel.setVisible(false);
         // sätter en vinstskärm
@@ -112,6 +119,39 @@ public class GameBoardPanel extends JPanel {
         repaint();
         //todo ta bort denna och inkludera istället getMoveCounter till lagring av highscore~
         // testar move counter
-        System.out.println("Du vann på "+ofg.getMoveCounter()+" steg.");
+        System.out.println("Du vann på " + ofg.getMoveCounter() + " steg.");
     }
+
+    private Color randomColor() {
+        Random rng = new Random();
+        Color c = new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
+        return c;
+    }
+
+    private void partyColorCelebration() {
+        final int maxTicks = 20;   // antal gånger
+        final int[] ticks = {0};   // räknare
+
+        Timer t = new Timer(300, e -> {
+            // Byt färg på alla knappar
+            for (JButton b : gameButtons) {
+                b.setOpaque(true);
+                b.setContentAreaFilled(true);
+                b.setBackground(randomColor());
+            }
+
+            ticks[0]++;
+
+            // När vi nått max, stoppa timern och byt skärm till vinstskärmen.
+            if (ticks[0] >= maxTicks) {
+                ((Timer) e.getSource()).stop();
+                printWinningScreen();
+            }
+        });
+
+        t.setInitialDelay(0);
+        t.start();
+    }
+
 }
+
