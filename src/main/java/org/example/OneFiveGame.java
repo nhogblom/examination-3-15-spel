@@ -16,6 +16,9 @@ public class OneFiveGame {
 
 
     public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY) {
+        if (username.equals("Demo")){
+            this.isDemo = true;
+        }
         this.username = username;
         this.gameBoardSizeX = gameBoardSizeX;
         this.gameBoardSizeY = gameBoardSizeY;
@@ -23,21 +26,29 @@ public class OneFiveGame {
         createGameBoard();
     }
 
-    public OneFiveGame(boolean isDemo) {
-        this.isDemo = isDemo;
-        createGameBoard();
-    }
 
     public void createGameBoard() {
         if (isDemo) {
             // one move to win demo.
-            gameBoardSizeX = 2;
-            gameBoardSizeY = 2;
+            gameBoardSizeX = 4;
+            gameBoardSizeY = 4;
             amountOfBoardTiles = gameBoardSizeX * gameBoardSizeY;
             gameBoard.add(1);
-            gameBoard.add(0);
-            gameBoard.add(3);
             gameBoard.add(2);
+            gameBoard.add(3);
+            gameBoard.add(4);
+            gameBoard.add(5);
+            gameBoard.add(6);
+            gameBoard.add(7);
+            gameBoard.add(8);
+            gameBoard.add(9);
+            gameBoard.add(10);
+            gameBoard.add(11);
+            gameBoard.add(12);
+            gameBoard.add(13);
+            gameBoard.add(14);
+            gameBoard.add(0);
+            gameBoard.add(15);
         } else {
             for (int i = 0; i < amountOfBoardTiles; i++) {
                 gameBoard.add(i);

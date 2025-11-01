@@ -103,7 +103,9 @@ public class GameBoardPanel extends JPanel {
 
     private void addNewHighScore() {
         //TODO här kan man lägga till kontroll ifall det är ny Highscore
-        new Highscore(ofg.getUsername(), ofg.getMoveCounter());
+        if (!ofg.getUsername().equals("Demo") || ofg.getUsername().isEmpty()){
+            new Highscore(ofg.getUsername(), ofg.getMoveCounter());
+        }
     }
 
     private void printWinningScreen() {
@@ -124,8 +126,7 @@ public class GameBoardPanel extends JPanel {
 
     private Color randomColor() {
         Random rng = new Random();
-        Color c = new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
-        return c;
+        return new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
     }
 
     private void partyColorCelebration() {
