@@ -68,7 +68,7 @@ public class LoginPanel extends JPanel {
         }else {
             ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows());
         }
-            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg, gui);
+            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg, gui, this);
             frame.add(gameBoardPanel);
             frame.setContentPane(gameBoardPanel);
             frame.revalidate();

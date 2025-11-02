@@ -3,6 +3,7 @@ package org.example.Panels.GameBoardPanel;
 import org.example.GUI;
 import org.example.OneFiveGame;
 import org.example.Panels.HighscorePanel.Highscore;
+import org.example.Panels.LoginPanel.LoginPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,7 @@ public class GameBoardPanel extends JPanel {
     JLabel welcomeLabel = new JLabel("Welcome to the game");
     JButton closeButton = new JButton("Close");
     JButton newGameButton = new JButton("New Game");
+    JButton backButton = new JButton("Back");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
     //todo se till att width och height blir korrekt, orignal bilden är 768x768~
@@ -23,8 +25,7 @@ public class GameBoardPanel extends JPanel {
     public static ArrayList<JButton> gameButtons = new ArrayList<>();
     GUI gui;
 
-
-    public GameBoardPanel(OneFiveGame ofg, GUI gui) {
+    public GameBoardPanel(OneFiveGame ofg, GUI gui, LoginPanel previousPanel) {
         this.ofg = ofg;
         this.gui = gui;
         setLayout(new BorderLayout());
@@ -41,13 +42,21 @@ public class GameBoardPanel extends JPanel {
         newGameButton.addActionListener(e -> {
             newGame();
         });
+
+        buttonPanel.add(backButton);
+        backButton.addActionListener(e -> {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.setContentPane(previousPanel);
+            frame.revalidate();
+            frame.repaint();
+        });
+
         buttonPanel.add(closeButton);
 
         closeButton.addActionListener(e -> gui.closeProgram());
 
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
-
 
         gameBoardPanel.setLayout(new GridLayout(ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY()));
 
