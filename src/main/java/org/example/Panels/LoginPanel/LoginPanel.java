@@ -25,6 +25,7 @@ public class LoginPanel extends JPanel {
     JButton MediumDifficultyButton = new JButton(Difficulty.MEDIUM.getDescription());
     JButton HardDifficultyButton = new JButton(Difficulty.HARD.getDescription());
 
+    JButton backButton = new JButton("Back");
 
     public LoginPanel(GUI gui) {
         this.gui = gui;
@@ -42,6 +43,15 @@ public class LoginPanel extends JPanel {
         difficultyButtonPanel.add(easyDifficultyButton);
         difficultyButtonPanel.add(MediumDifficultyButton);
         difficultyButtonPanel.add(HardDifficultyButton);
+
+        add(backButton);
+        backButton.addActionListener(e -> {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.setContentPane(new StartPanel(this.gui));
+            frame.revalidate();
+            frame.repaint();
+        });
+
         add(footerPanel);
         footerPanel.add(footerSignature);
         footerSignature.setHorizontalAlignment(JLabel.CENTER);
@@ -68,7 +78,7 @@ public class LoginPanel extends JPanel {
         }else {
             ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows());
         }
-            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg, gui);
+            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg, gui, this);
             frame.add(gameBoardPanel);
             frame.setContentPane(gameBoardPanel);
             frame.revalidate();
