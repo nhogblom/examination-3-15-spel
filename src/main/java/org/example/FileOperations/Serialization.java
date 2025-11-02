@@ -10,15 +10,21 @@ import java.util.ArrayList;
 
 public class Serialization{
 
-    ArrayList<Highscore> hlistEasy = Highscore.getHighscoresList();
+    private final String fileNameEasy = "highscores.txt";
+    private final String fileNameMedium = "highscoresMedium.txt";
+    private final String fileNameHard = "highscoresHard.txt";
 
     public void Serialize(){
+        serializeFunction(Highscore.getHighscoresList(),fileNameEasy);
+        serializeFunction(Highscore.getHighscoresListMedium(),fileNameMedium);
+        serializeFunction(Highscore.getHighscoresListHard(),fileNameHard);
 
-
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("highscores.txt"))) {
-            int count = hlistEasy.size();
+    }
+    private void serializeFunction(ArrayList<Highscore> highscoreList, String fileName) {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            int count = highscoreList.size();
             oos.writeInt(count);
-            for(Highscore h : hlistEasy){
+            for(Highscore h : highscoreList){
                 oos.writeObject(h);
             }
 
@@ -30,7 +36,6 @@ public class Serialization{
     }
 
     public void deserialize(String fileName){
-
         if(doesFileExist(fileName)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))){
                 int count = ois.readInt();
@@ -47,8 +52,8 @@ public class Serialization{
                 throw new RuntimeException(e);
             }
         }
-
     }
+
     private boolean doesFileExist(String fileName){
         Path pathToFile = Paths.get(fileName);
         return Files.exists(pathToFile);
