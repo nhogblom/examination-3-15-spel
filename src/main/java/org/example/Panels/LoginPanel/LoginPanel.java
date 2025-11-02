@@ -72,11 +72,11 @@ public class LoginPanel extends JPanel {
         OneFiveGame ofg;
 
         if(difficulty.equals(Difficulty.EASY.getDescription())){
-            ofg = new OneFiveGame(username, Difficulty.EASY.getxRows(), Difficulty.EASY.getyRows());
+            ofg = new OneFiveGame(username, Difficulty.EASY.getxRows(), Difficulty.EASY.getyRows(),Difficulty.EASY.getDescription());
         }else if(difficulty.equals(Difficulty.MEDIUM.getDescription())){
-            ofg = new OneFiveGame(username,Difficulty.MEDIUM.getxRows(), Difficulty.MEDIUM.getyRows());
+            ofg = new OneFiveGame(username,Difficulty.MEDIUM.getxRows(), Difficulty.MEDIUM.getyRows(),Difficulty.MEDIUM.getDescription());
         }else {
-            ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows());
+            ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows(),Difficulty.HARD.getDescription());
         }
             GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg, gui, this);
             frame.add(gameBoardPanel);

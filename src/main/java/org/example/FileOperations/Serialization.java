@@ -10,15 +10,23 @@ import java.util.ArrayList;
 
 public class Serialization{
 
-    ArrayList<Highscore> hlist = Highscore.getHighscoresList();
+    private final String fileNameEasy = "highscores.txt";
+    private final String fileNameMedium = "highscoresMedium.txt";
+    private final String fileNameHard = "highscoresHard.txt";
+    Highscore highscore;
+
 
     public void Serialize(){
+        serializeFunction(Highscore.getHighscoresList(),fileNameEasy);
+        serializeFunction(Highscore.getHighscoresListMedium(),fileNameMedium);
+        serializeFunction(Highscore.getHighscoresListHard(),fileNameHard);
 
-
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("highscores.txt"))) {
-            int count = hlist.size();
+    }
+    private void serializeFunction(ArrayList<Highscore> highscoreList, String fileName) {
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            int count = highscoreList.size();
             oos.writeInt(count);
-            for(Highscore h : hlist){
+            for(Highscore h : highscoreList){
                 oos.writeObject(h);
             }
 
@@ -29,14 +37,20 @@ public class Serialization{
         }
     }
 
-    public void deserialize(String fileName){
+    public void deserialize(){
+        Highscore.setHighscoresList(deserializeFunction(fileNameEasy));
+        Highscore.setHighscoresListMedium(deserializeFunction(fileNameMedium));
+        Highscore.setHighscoresListHard(deserializeFunction(fileNameHard));
+    }
 
+    private ArrayList<Highscore> deserializeFunction(String fileName){
+        ArrayList<Highscore> highscores = new ArrayList<>();
         if(doesFileExist(fileName)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))){
+
                 int count = ois.readInt();
                 for(int i = 0; i < count; i++) {
-                    Highscore highscore = (Highscore) ois.readObject();
-                    highscore.addHighscoreToList();
+                    highscores.add((Highscore) ois.readObject());
                 }
 
             } catch (FileNotFoundException e) {
@@ -47,8 +61,9 @@ public class Serialization{
                 throw new RuntimeException(e);
             }
         }
-
+        return highscores;
     }
+
     private boolean doesFileExist(String fileName){
         Path pathToFile = Paths.get(fileName);
         return Files.exists(pathToFile);

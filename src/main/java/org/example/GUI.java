@@ -22,7 +22,7 @@ public class GUI extends JFrame {
         frame.add(StartPanel);
         StartPanel.setVisible(true);
 
-        serializeClass.deserialize("highscores.txt");
+        serializeClass.deserialize();
 
         frame.addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e){

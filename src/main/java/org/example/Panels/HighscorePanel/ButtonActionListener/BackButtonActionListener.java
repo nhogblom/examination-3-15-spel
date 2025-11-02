@@ -17,6 +17,7 @@ public class BackButtonActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(button);
+        frame.setSize(500, 500);
         frame.setContentPane(previousPanel);
         frame.revalidate();
         frame.repaint();
