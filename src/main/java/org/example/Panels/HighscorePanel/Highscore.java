@@ -59,6 +59,14 @@ public class Highscore implements Serializable {
         highscoresList.add(this);
     }
 
+    public static ArrayList<Highscore> getHighscoresListMedium() {
+        return highscoresListMedium;
+    }
+
+    public static ArrayList<Highscore> getHighscoresListHard() {
+        return highscoresListHard;
+    }
+
     public static ArrayList<Highscore> getHighscoresList() {
         return highscoresList;
     }
