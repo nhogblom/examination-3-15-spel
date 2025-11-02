@@ -10,15 +10,15 @@ import java.util.ArrayList;
 
 public class Serialization{
 
-    ArrayList<Highscore> hlist = Highscore.getHighscoresList();
+    ArrayList<Highscore> hlistEasy = Highscore.getHighscoresList();
 
     public void Serialize(){
 
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("highscores.txt"))) {
-            int count = hlist.size();
+            int count = hlistEasy.size();
             oos.writeInt(count);
-            for(Highscore h : hlist){
+            for(Highscore h : hlistEasy){
                 oos.writeObject(h);
             }
 

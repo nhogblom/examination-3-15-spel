@@ -18,8 +18,8 @@ public class HighscorePanel extends JPanel {
 
     public HighscorePanel(JPanel previousPanel) {
         this.previousPanel = previousPanel;
-        ArrayList<Highscore> hlist = Highscore.getHighscoresList();
-
+        ArrayList<Highscore> hlistEasy = Highscore.getHighscoresList();
+        
         setLayout(new BorderLayout());
 
         add(highscoreLabel,BorderLayout.NORTH);
@@ -31,7 +31,7 @@ public class HighscorePanel extends JPanel {
                 .append("Turns").append("\t".repeat(2))
                 .append("Time").append("\t".repeat(2)).append("\n");
 
-        for(Highscore highscore : hlist){
+        for(Highscore highscore : hlistEasy){
             textAreaTextSb.append(highscore.getName()).append("\t".repeat(2))
                     .append(highscore.getTurns()).append("\t".repeat(2))
                     .append("12:30").append("\t".repeat(2)).append("\n");
