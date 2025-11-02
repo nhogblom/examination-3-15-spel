@@ -18,26 +18,37 @@ public class Highscore implements Serializable {
     private int gameSize;
     private final int maxHighscores = 5;
 
-    public Highscore() {}
+    public Highscore() {
+    }
 
     //TODO add time for the time it took to clear game
 
-    public Highscore(String name, int turns) {
+    public Highscore(String name, int turns, String Difficulty) {
         this.name = name;
         this.turns = turns;
-        highscoresList.add(this);
-        sortArrayListByTurns();
-        if(highscoresList.size() > maxHighscores) {
+
+        switch (Difficulty) {
+            case "Easy" -> addToArrayList(highscoresList);
+            case "Medium" -> addToArrayList(highscoresListMedium);
+            case "Hard" -> addToArrayList(highscoresListHard);
+        }
+    }
+
+    private void addToArrayList(ArrayList<Highscore> arrayListToAddTo) {
+        arrayListToAddTo.add(this);
+        sortArrayListByTurns(arrayListToAddTo);
+        if (arrayListToAddTo.size() > maxHighscores) {
             removeElementsOutsideOfHighscore();
         }
     }
 
-    public void removeElementsOutsideOfHighscore(){
+    public void removeElementsOutsideOfHighscore() {
         highscoresList.remove(maxHighscores);
     }
 
-    public void sortArrayListByTurns(){
-        Collections.sort(highscoresList, new sortByTurns());
+    public ArrayList<Highscore> sortArrayListByTurns(ArrayList<Highscore> hlist) {
+        Collections.sort(hlist, new sortByTurns());
+        return hlist;
     }
 
     public String getName() {
@@ -68,7 +79,7 @@ public class Highscore implements Serializable {
 class sortByTurns implements Comparator<Highscore> {
     @Override
     public int compare(Highscore h1, Highscore h2) {
-            return h1.getTurns() - h2.getTurns();
+        return h1.getTurns() - h2.getTurns();
     }
 }
 
