@@ -19,7 +19,10 @@ public class HighscorePanel extends JPanel {
     public HighscorePanel(JPanel previousPanel) {
         this.previousPanel = previousPanel;
         ArrayList<Highscore> hlistEasy = Highscore.getHighscoresList();
-        
+        ArrayList<Highscore> hlistMedium = Highscore.getHighscoresList();
+        ArrayList<Highscore> hlistHard = Highscore.getHighscoresList();
+
+
         setLayout(new BorderLayout());
 
         add(highscoreLabel,BorderLayout.NORTH);

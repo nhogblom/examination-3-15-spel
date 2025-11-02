@@ -13,15 +13,20 @@ public class OneFiveGame {
     private boolean currentGameWon = false;
     private String username;
     private int moveCounter = 0;
+    private String difficulty;
 
+    public String getDifficulty() {
+        return difficulty;
+    }
 
-    public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY) {
+    public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, String difficulty) {
         if (username.equals("Demo")){
             this.isDemo = true;
         }
         this.username = username;
         this.gameBoardSizeX = gameBoardSizeX;
         this.gameBoardSizeY = gameBoardSizeY;
+        this.difficulty = difficulty;
         this.amountOfBoardTiles = gameBoardSizeX * gameBoardSizeY;
         createGameBoard();
     }

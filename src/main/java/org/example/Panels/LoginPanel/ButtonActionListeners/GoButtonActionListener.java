@@ -35,7 +35,7 @@ public class GoButtonActionListener implements ActionListener {
             int gridSizeXInt = Integer.parseInt(gridSizeX.getText());
             int gridSizeYInt = Integer.parseInt(gridSizeY.getText());
 
-            this.ofg = new OneFiveGame(userNameString, gridSizeXInt, gridSizeYInt);
+//            this.ofg = new OneFiveGame(userNameString, gridSizeXInt, gridSizeYInt);
             jp.setVisible(false);
 //
 ////            GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg);

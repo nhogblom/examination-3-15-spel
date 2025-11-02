@@ -69,7 +69,7 @@ public class GameBoardPanel extends JPanel {
         GameBoardPanel.gameButtons.clear();
         gameBoardPanel.setVisible(true);
         moveCountLabel.setText("");
-        ofg = new OneFiveGame(ofg.getUsername(), ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY());
+        ofg = new OneFiveGame(ofg.getUsername(), ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY(),ofg.getDifficulty());
         printGameBoard();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
