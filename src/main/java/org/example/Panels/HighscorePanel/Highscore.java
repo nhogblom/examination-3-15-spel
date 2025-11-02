@@ -8,6 +8,8 @@ import java.util.Comparator;
 
 public class Highscore implements Serializable {
 
+    private final static long serialVersionUID = 1L;
+
     private String name;
     private int turns;
     private static ArrayList<Highscore> highscoresList = new ArrayList<>();
