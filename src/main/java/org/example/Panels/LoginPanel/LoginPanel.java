@@ -25,6 +25,7 @@ public class LoginPanel extends JPanel {
     JButton MediumDifficultyButton = new JButton(Difficulty.MEDIUM.getDescription());
     JButton HardDifficultyButton = new JButton(Difficulty.HARD.getDescription());
 
+    JButton backButton = new JButton("Back");
 
     public LoginPanel(GUI gui) {
         this.gui = gui;
@@ -42,6 +43,15 @@ public class LoginPanel extends JPanel {
         difficultyButtonPanel.add(easyDifficultyButton);
         difficultyButtonPanel.add(MediumDifficultyButton);
         difficultyButtonPanel.add(HardDifficultyButton);
+
+        add(backButton);
+        backButton.addActionListener(e -> {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            frame.setContentPane(new StartPanel(this.gui));
+            frame.revalidate();
+            frame.repaint();
+        });
+
         add(footerPanel);
         footerPanel.add(footerSignature);
         footerSignature.setHorizontalAlignment(JLabel.CENTER);
