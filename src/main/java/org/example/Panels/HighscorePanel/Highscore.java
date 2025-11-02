@@ -3,6 +3,8 @@ package org.example.Panels.HighscorePanel;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Highscore implements Serializable {
 
@@ -20,6 +22,11 @@ public class Highscore implements Serializable {
         this.turns = turns;
 
         highscoresList.add(this);
+        sortArrayListByTurns();
+    }
+
+    public void sortArrayListByTurns(){
+        Collections.sort(highscoresList, new sortByTurns());
     }
 
     public String getName() {
@@ -46,3 +53,11 @@ public class Highscore implements Serializable {
         this.turns = turns;
     }
 }
+
+class sortByTurns implements Comparator<Highscore> {
+    @Override
+    public int compare(Highscore h1, Highscore h2) {
+            return h1.getTurns() - h2.getTurns();
+    }
+}
+
