@@ -13,6 +13,8 @@ public class Serialization{
     private final String fileNameEasy = "highscores.txt";
     private final String fileNameMedium = "highscoresMedium.txt";
     private final String fileNameHard = "highscoresHard.txt";
+    Highscore highscore;
+
 
     public void Serialize(){
         serializeFunction(Highscore.getHighscoresList(),fileNameEasy);
@@ -35,13 +37,20 @@ public class Serialization{
         }
     }
 
-    public void deserialize(String fileName){
+    public void deserialize(){
+        Highscore.setHighscoresList(deserializeFunction(fileNameEasy));
+        Highscore.setHighscoresListMedium(deserializeFunction(fileNameMedium));
+        Highscore.setHighscoresListHard(deserializeFunction(fileNameHard));
+    }
+
+    private ArrayList<Highscore> deserializeFunction(String fileName){
+        ArrayList<Highscore> highscores = new ArrayList<>();
         if(doesFileExist(fileName)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))){
+
                 int count = ois.readInt();
                 for(int i = 0; i < count; i++) {
-                    Highscore highscore = (Highscore) ois.readObject();
-                    highscore.addHighscoreToList();
+                    highscores.add((Highscore) ois.readObject());
                 }
 
             } catch (FileNotFoundException e) {
@@ -52,6 +61,7 @@ public class Serialization{
                 throw new RuntimeException(e);
             }
         }
+        return highscores;
     }
 
     private boolean doesFileExist(String fileName){

@@ -111,10 +111,10 @@ public class GameBoardPanel extends JPanel {
     }
 
     private void addNewHighScore() {
-        //TODO här kan man lägga till kontroll ifall det är ny Highscore
-        if (!ofg.getUsername().equals("Demo") || ofg.getUsername().isEmpty()){
+        //TODO här kan man lägga till kontroll ifall det är ny Highscore TOG BORT !ofg.getUsername().equals("Demo") || för att testa highscore för medium + hard
+//        if (!ofg.getUsername().equals("Demo") || ofg.getUsername().isEmpty()){
             new Highscore(ofg.getUsername(), ofg.getMoveCounter(),ofg.getDifficulty());
-        }
+//        }
     }
 
     private void printWinningScreen() {
