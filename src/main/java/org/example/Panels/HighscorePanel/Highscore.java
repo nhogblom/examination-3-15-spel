@@ -12,6 +12,7 @@ public class Highscore implements Serializable {
     private int turns;
     private static ArrayList<Highscore> highscoresList = new ArrayList<>();
     private int gameSize;
+    private final int maxHighscores = 5;
 
     public Highscore() {}
 
@@ -20,9 +21,15 @@ public class Highscore implements Serializable {
     public Highscore(String name, int turns) {
         this.name = name;
         this.turns = turns;
-
         highscoresList.add(this);
         sortArrayListByTurns();
+        if(highscoresList.size() > maxHighscores) {
+            removeElementsOutsideOfHighscore();
+        }
+    }
+
+    public void removeElementsOutsideOfHighscore(){
+        highscoresList.remove(maxHighscores);
     }
 
     public void sortArrayListByTurns(){
