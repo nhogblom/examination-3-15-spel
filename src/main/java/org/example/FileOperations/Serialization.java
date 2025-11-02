@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Serialization{
 
@@ -24,12 +25,8 @@ public class Serialization{
     }
     private void serializeFunction(ArrayList<Highscore> highscoreList, String fileName) {
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            int count = highscoreList.size();
-            oos.writeInt(count);
-            for(Highscore h : highscoreList){
-                oos.writeObject(h);
-            }
 
+            oos.writeObject(highscoreList);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -48,10 +45,7 @@ public class Serialization{
         if(doesFileExist(fileName)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))){
 
-                int count = ois.readInt();
-                for(int i = 0; i < count; i++) {
-                    highscores.add((Highscore) ois.readObject());
-                }
+                highscores = ((ArrayList<Highscore>) ois.readObject());
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
