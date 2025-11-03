@@ -15,7 +15,6 @@ public class Serialization{
     private final String fileNameEasy = "src/main/resources/highscores.txt";
     private final String fileNameMedium = "src/main/resources/highscoresMedium.txt";
     private final String fileNameHard = "src/main/resources/highscoresHard.txt";
-    Highscore highscore;
 
 
     public void Serialize(){
