@@ -137,7 +137,8 @@ public class OneFiveGame {
     }
 
 
-    private int isMovePossibleAndWhereTo(int numberToMove) {
+    private List<Change> isMovePossibleAndWhereTo(int numberToMove) {
+        List<Change> changes = new ArrayList<>();
         // index of the number that we want to move.
         int numberToMoveIndex = gameBoard.indexOf(numberToMove);
         // index of the empty field.
@@ -148,52 +149,64 @@ public class OneFiveGame {
 
         IO.print("Number to move: " + numberToMoveIndex + "\nNumberrow: " + numberRow + "\nNumberCol: " + numberCol + "\nIndexOfZero: " + indexOfZero);
 
-        if (checkMove(numberToMoveIndex, indexOfZero, numberRow, numberCol, 2) != -1) {
-            return checkMove(numberToMoveIndex, indexOfZero, numberRow, numberCol, 2);
-        } else {
-            return checkMove(numberToMoveIndex, indexOfZero, numberRow, numberCol, 1);
-        }
-    }
-
-
-
-    private int checkMove(int numberToMoveIndex, int indexOfZero, int numberRow, int numberCol, int numberOfMoves) {
         // check if movement to the left is possible if the tile is empty.
+
+        int numberOfMoves;
+        for (int i = 1; i <= 2; i++) {
+            numberOfMoves = i;
         if (numberCol - numberOfMoves >= 0) {
-            int indexWest = ((numberRow * gameBoardSizeX) + numberCol - numberOfMoves);
-            if (indexWest == indexOfZero) {
-                return indexWest;
+            int targetIndexWest = ((numberRow * gameBoardSizeX) + numberCol - numberOfMoves);
+            if (targetIndexWest == indexOfZero) {
+                if (numberOfMoves == 1){
+                    changes.add(new Change(numberToMoveIndex,indexOfZero));
+                    changes.add(new Change(indexOfZero,numberToMoveIndex));
+                }else if(numberOfMoves == 2){
+                    int midTileIndex = gameBoard.get(targetIndexWest + 1);
+                    changes.add(new Change(indexOfZero,midTileIndex));
+                    changes.add(new Change(indexOfZero,numberToMoveIndex));
+                    changes.add(new Change(indexOfZero,numberToMoveIndex));
+
+                }
+                return targetIndexWest;
             }
         }
 
         // check if movement to the right..
         if (numberCol + numberOfMoves <= gameBoardSizeX - 1) {
-            int indexEast = ((numberRow * gameBoardSizeX) + numberCol + numberOfMoves);
-            if (indexEast == indexOfZero) {
-                return indexEast;
+            int targetIndexEast = ((numberRow * gameBoardSizeX) + numberCol + numberOfMoves);
+            if (targetIndexEast == indexOfZero) {
+                // add changes appropriate for a one or two move change.
+                return targetIndexEast;
             }
         }
 
         // check if movement up is possible....~
         if (numberRow - numberOfMoves >= 0) {
-            int indexNorth = (numberToMoveIndex - gameBoardSizeX * numberOfMoves);
-            if (indexNorth == indexOfZero) {
-                return indexNorth;
+            int targetIndexNorth = (numberToMoveIndex - gameBoardSizeX * numberOfMoves);
+            if (targetIndexNorth == indexOfZero) {
+                // add changes appropriate for a one or two move change.
+                return targetIndexNorth;
             }
         }
 
         // check if movment down...
         if (numberRow + numberOfMoves <= gameBoardSizeY - 1) {
-            int indexSouth = (numberToMoveIndex + gameBoardSizeX * numberOfMoves);
-            if (indexSouth == indexOfZero) {
-                return indexSouth;
+            int targetIndexSouth = (numberToMoveIndex + gameBoardSizeX * numberOfMoves);
+            if (targetIndexSouth == indexOfZero) {
+                // add changes appropriate for a one or two move change.
+                return targetIndexSouth;
             }
+        }
         }
 
         // if no movement was possible return -1
         IO.println("no movement possible");
-        return -1;
+        return changes
     }
+
+
+
+
 
 
     private int indexOfZero() {
