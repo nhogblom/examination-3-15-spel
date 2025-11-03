@@ -2,6 +2,7 @@ package org.example.Panels.HighscorePanel;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,21 +18,27 @@ public class Highscore implements Serializable {
     private static ArrayList<Highscore> highscoresListHard = new ArrayList<>();
     private int gameSize;
     private final int maxHighscores = 5;
+    private LocalTime completionTime;
 
     public Highscore() {
     }
 
     //TODO add time for the time it took to clear game
 
-    public Highscore(String name, int turns, String Difficulty) {
+    public Highscore(String name, int turns, String Difficulty, LocalTime completionTime) {
         this.name = name;
         this.turns = turns;
+        this.completionTime = completionTime;
 
         switch (Difficulty) {
             case "Easy" -> addToArrayList(highscoresList);
             case "Medium" -> addToArrayList(highscoresListMedium);
             case "Hard" -> addToArrayList(highscoresListHard);
         }
+    }
+
+    public LocalTime getCompletionTime() {
+        return completionTime;
     }
 
     private void addToArrayList(ArrayList<Highscore> arrayListToAddTo) {
@@ -100,6 +107,9 @@ public class Highscore implements Serializable {
 class sortByTurns implements Comparator<Highscore> {
     @Override
     public int compare(Highscore h1, Highscore h2) {
+        if(h1.getTurns() == h2.getTurns()){
+            return h1.getCompletionTime().compareTo(h2.getCompletionTime());
+        }
         return h1.getTurns() - h2.getTurns();
     }
 }

@@ -74,7 +74,7 @@ public class HighscorePanel extends JPanel {
         for(Highscore highscore : highscoreList){
             textAreaTextSb.append(highscore.getName()).append("\t".repeat(2))
                     .append(highscore.getTurns()).append("\t".repeat(2))
-                    .append("12:30").append("\t".repeat(2)).append("\n");
+                    .append(highscore.getCompletionTime()).append("\t".repeat(2)).append("\n");
         }
         return textAreaTextSb.toString();
     }
