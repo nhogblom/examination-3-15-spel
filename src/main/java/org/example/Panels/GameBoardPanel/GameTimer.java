@@ -31,7 +31,7 @@ public class GameTimer extends Thread{
             try{
                 seconds++;
                 gameTime = gameTime.plusSeconds(1);
-                timeLabel.setText(gameTime.toString());
+                timeLabel.setText("Time: " + gameTime.toString());
                 Thread.sleep(1000);
             }catch(InterruptedException e){
                 return;

@@ -107,6 +107,9 @@ public class Highscore implements Serializable {
 class sortByTurns implements Comparator<Highscore> {
     @Override
     public int compare(Highscore h1, Highscore h2) {
+        if(h1.getTurns() == h2.getTurns()){
+            return h1.getCompletionTime().compareTo(h2.getCompletionTime());
+        }
         return h1.getTurns() - h2.getTurns();
     }
 }
