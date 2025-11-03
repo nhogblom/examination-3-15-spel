@@ -16,6 +16,7 @@ public class OneFiveGame {
     private String username;
     private int moveCounter = 0;
     private String difficulty;
+    private List<Change> changes = new ArrayList<>();
 
     public String getDifficulty() {
         return difficulty;
@@ -154,25 +155,6 @@ public class OneFiveGame {
         }
     }
 
-    public class Change {
-
-        private int a, b;
-
-        public Change(int a, int b) {
-            this.a = a;
-            this.b = b;
-
-        }
-
-    }
-
-    public void test(){
-        List<Change> changes = new ArrayList<>();
-
-
-
-
-    }
 
 
     private int checkMove(int numberToMoveIndex, int indexOfZero, int numberRow, int numberCol, int numberOfMoves) {
