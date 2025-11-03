@@ -108,8 +108,6 @@ private List<Change> getChangesToMove(int numberToMove) {
     int numberRow = numberToMoveIndex / gameBoardSizeX;
     int numberCol = numberToMoveIndex % gameBoardSizeX;
 
-    IO.print("Number to move: " + numberToMoveIndex + "\nNumberrow: " + numberRow + "\nNumberCol: " + numberCol + "\nIndexOfZero: " + indexOfZero);
-
 
     int numberOfMoves = 0;
     int directionalOffset = 0;
