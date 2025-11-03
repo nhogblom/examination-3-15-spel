@@ -57,7 +57,11 @@ public class LoginPanel extends JPanel {
 
         ActionListener difficultyButtonListener = e -> {
             JButton clickedButton = (JButton) e.getSource();
-            difficultyButtonActionPerformed(usernameField.getText(),clickedButton.getText());
+            if(usernameField.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Please enter your username!");
+            }else{
+                difficultyButtonActionPerformed(usernameField.getText(),clickedButton.getText());
+            }
         };
 
         easyDifficultyButton.addActionListener(difficultyButtonListener);
