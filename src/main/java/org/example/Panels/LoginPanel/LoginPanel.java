@@ -4,7 +4,6 @@ import org.example.Enums.Difficulty;
 import org.example.GUI;
 import org.example.OneFiveGame;
 import org.example.Panels.GameBoardPanel.GameBoardPanel;
-import org.example.Panels.LoginPanel.ButtonActionListeners.GoButtonActionListener;
 import org.example.Panels.StartPanel.StartPanel;
 
 import javax.swing.*;

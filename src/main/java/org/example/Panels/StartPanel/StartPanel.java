@@ -15,7 +15,6 @@ public class StartPanel extends JPanel {
     JLabel titleLabel = new JLabel("<html><h1>Welcome to our board game!</h1></html>");
     JButton startButton = new JButton("Start new game");
     JButton highscoreButton = new JButton("High Scores");
-    JButton settingsButton = new JButton("Settings");
     JButton exitButton = new JButton("Exit");
     JLabel footerSignature = new JLabel("Ivan & Niklas 2025");
 
@@ -32,11 +31,9 @@ public class StartPanel extends JPanel {
     headerPanel.add(titleLabel);
     optionsPanel.add(startButton);
     optionsPanel.add(highscoreButton);
-    optionsPanel.add(settingsButton);
     optionsPanel.add(exitButton);
     exitButton.addActionListener(e -> gui.closeProgram());
     footerPanel.add(footerSignature);
-
     startButton.addActionListener(new startButtonActionListener(this,gui));
     highscoreButton.addActionListener(new HighscoreButtonActionListener(this));
 
