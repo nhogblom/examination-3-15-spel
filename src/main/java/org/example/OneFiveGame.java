@@ -154,6 +154,27 @@ public class OneFiveGame {
         }
     }
 
+    public class Change {
+
+        private int a, b;
+
+        public Change(int a, int b) {
+            this.a = a;
+            this.b = b;
+
+        }
+
+    }
+
+    public void test(){
+        List<Change> changes = new ArrayList<>();
+
+
+
+
+    }
+
+
     private int checkMove(int numberToMoveIndex, int indexOfZero, int numberRow, int numberCol, int numberOfMoves) {
         // check if movement to the left is possible if the tile is empty.
         if (numberCol - numberOfMoves >= 0) {
@@ -186,6 +207,7 @@ public class OneFiveGame {
                 return indexSouth;
             }
         }
+
         // if no movement was possible return -1
         IO.println("no movement possible");
         return -1;
