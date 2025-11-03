@@ -7,6 +7,7 @@ import org.example.Panels.LoginPanel.LoginPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,8 +23,10 @@ public class GameBoardPanel extends JPanel {
     //todo se till att width och height blir korrekt, orignal bilden är 768x768~
     JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
     JLabel moveCountLabel = new JLabel();
+    JLabel timeLabel = new JLabel("Time: 00:00:10");
     public static ArrayList<JButton> gameButtons = new ArrayList<>();
     GUI gui;
+    GameTimer gameTimer = new GameTimer(timeLabel);
 
     public GameBoardPanel(OneFiveGame ofg, GUI gui, LoginPanel previousPanel) {
         this.ofg = ofg;
@@ -39,6 +42,7 @@ public class GameBoardPanel extends JPanel {
         add(buttonPanel, BorderLayout.SOUTH);
         buttonPanel.add(moveCountLabel);
         buttonPanel.add(newGameButton);
+
         newGameButton.addActionListener(e -> {
             newGame();
         });
@@ -52,13 +56,16 @@ public class GameBoardPanel extends JPanel {
         });
 
         buttonPanel.add(closeButton);
-
+        buttonPanel.add(timeLabel);
         closeButton.addActionListener(e -> gui.closeProgram());
 
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
 
         gameBoardPanel.setLayout(new GridLayout(ofg.getGameBoardSizeX(), ofg.getGameBoardSizeY()));
+
+
+        gameTimer.start();
 
         // display game
         printGameBoard();
@@ -73,6 +80,11 @@ public class GameBoardPanel extends JPanel {
         printGameBoard();
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
+
+        gameTimer.interrupt();
+        gameTimer = new GameTimer(timeLabel);
+        timeLabel.setText("Time: 00:00:00");
+        gameTimer.start();
     }
 
 
@@ -113,7 +125,8 @@ public class GameBoardPanel extends JPanel {
     private void addNewHighScore() {
         //TODO här kan man lägga till kontroll ifall det är ny Highscore TOG BORT !ofg.getUsername().equals("Demo") || för att testa highscore för medium + hard
 //        if (!ofg.getUsername().equals("Demo") || ofg.getUsername().isEmpty()){
-            new Highscore(ofg.getUsername(), ofg.getMoveCounter(),ofg.getDifficulty());
+            LocalTime elapsedTime = gameTimer.getGameTime();
+            new Highscore(ofg.getUsername(), ofg.getMoveCounter(),ofg.getDifficulty(),elapsedTime);
 //        }
     }
 
