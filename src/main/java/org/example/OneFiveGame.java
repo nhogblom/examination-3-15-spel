@@ -76,6 +76,7 @@ public class OneFiveGame {
         } else if (changes.size() == 2) {
             moveCounter++;
         }
+        setIfGameIsWon();
     }
 
 
