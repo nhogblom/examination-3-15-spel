@@ -72,13 +72,6 @@ public class OneFiveGame {
         int whereWeAreMovingFrom = gameBoard.indexOf(numberToMove);
 
         if (whereToMove != -1) {
-
-            /*
-                0   1
-                2   3
-
-             */
-
             //If double move to the right is possible
             if (whereToMove - 2 == whereWeAreMovingFrom && !difficulty.equals("Easy")) {
                 IO.println("hamnar i move right double");
