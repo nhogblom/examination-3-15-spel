@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.Enums.Difficulty;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,59 +63,21 @@ public class OneFiveGame {
                 Collections.shuffle(gameBoard);
             } while (!isSolvable(gameBoard));
         }
-        System.out.println(isSolvable(gameBoard));
     }
 
     public void move(int numberToMove) {
-        int whereToMove = isMovePossibleAndWhereTo(numberToMove);
-        int whereWeAreMovingFrom = gameBoard.indexOf(numberToMove);
+        List<Change> changes = getChangesToMove(numberToMove);
 
-        if (whereToMove != -1) {
-            //If double move to the right is possible
-            if (whereToMove - 2 == whereWeAreMovingFrom && !difficulty.equals("Easy")) {
-                IO.println("hamnar i move right double");
-                int midNumber = gameBoard.get(whereWeAreMovingFrom + 1);
-                gameBoard.set(whereWeAreMovingFrom + 1, numberToMove);
-                gameBoard.set(whereToMove, midNumber);
-                gameBoard.set(whereWeAreMovingFrom, 0);
-                moveCounter += 2;
-
-                //If double move to the left is possible
-            } else if (whereToMove + 2 == whereWeAreMovingFrom && !difficulty.equals("Easy")) {
-                IO.println("hamnar i move left double");
-                int midNumber = gameBoard.get(whereWeAreMovingFrom - 1);
-                gameBoard.set(whereWeAreMovingFrom - 1, numberToMove);
-                gameBoard.set(whereToMove, midNumber);
-                gameBoard.set(whereWeAreMovingFrom, 0);
-                moveCounter += 2;
-
-                //If double move down is possible
-            } else if (whereToMove - gameBoardSizeX * 2 == whereWeAreMovingFrom && !difficulty.equals("Easy")) {
-                IO.println("hamnar i move down double");
-                int midNumber = gameBoard.get(whereWeAreMovingFrom + gameBoardSizeX);
-                gameBoard.set(whereWeAreMovingFrom + gameBoardSizeX, numberToMove);
-                gameBoard.set(whereToMove, midNumber);
-                gameBoard.set(whereWeAreMovingFrom, 0);
-                moveCounter += 2;
-            }
-            // if double move up is possible
-            else if (whereToMove + gameBoardSizeX * 2 == whereWeAreMovingFrom && !difficulty.equals("Easy")) {
-                IO.println("hamnar i move up double");
-                int midNumber = gameBoard.get(whereWeAreMovingFrom - gameBoardSizeX);
-                gameBoard.set(whereWeAreMovingFrom - gameBoardSizeX, numberToMove);
-                gameBoard.set(whereToMove, midNumber);
-                gameBoard.set(whereWeAreMovingFrom, 0);
-                moveCounter += 2;
-            } else {
-                IO.println("vi är på rätt ställe men det blir fel ändå");
-                gameBoard.set(whereToMove, numberToMove);
-                gameBoard.set(whereWeAreMovingFrom, 0);
-                moveCounter++;
-                setIfGameIsWon();
-            }
+        for (int i = 0; i < changes.size(); i++) {
+            gameBoard.set(changes.get(i).getFrom(), changes.get(i).getTo());
         }
-
+        if (changes.size() == 3) {
+            moveCounter += 2;
+        } else if (changes.size() == 2) {
+            moveCounter++;
+        }
     }
+
 
     private void setIfGameIsWon() {
         if (gameBoard.getLast() == 0) {
@@ -136,7 +97,8 @@ public class OneFiveGame {
     }
 
 
-    private int isMovePossibleAndWhereTo(int numberToMove) {
+    private List<Change> getChangesToMove(int numberToMove) {
+        List<Change> changes = new ArrayList<>();
         // index of the number that we want to move.
         int numberToMoveIndex = gameBoard.indexOf(numberToMove);
         // index of the empty field.
@@ -145,72 +107,66 @@ public class OneFiveGame {
         int numberRow = numberToMoveIndex / gameBoardSizeX;
         int numberCol = numberToMoveIndex % gameBoardSizeX;
 
-        IO.print("Number to move: " + numberToMoveIndex + "\nNumberrow: " + numberRow + "\nNumberCol: " + numberCol + "\nIndexOfZero: " + indexOfZero);
 
-        if (checkMove(numberToMoveIndex, indexOfZero, numberRow, numberCol, 2) != -1) {
-            return checkMove(numberToMoveIndex, indexOfZero, numberRow, numberCol, 2);
-        } else {
-            return checkMove(numberToMoveIndex, indexOfZero, numberRow, numberCol, 1);
-        }
-    }
+        int numberOfMoves = 0;
+        int directionalOffset = 0;
+        int directionalOffsetToMidTileFromZero = 0;
 
-    public class Change {
+        for (int i = 1; i <= 2 && directionalOffset == 0; i++) {
+            numberOfMoves = i;
 
-        private int a, b;
+            // west possible
+            if (numberCol - numberOfMoves >= 0) {
+                int targetIndexWest = ((numberRow * gameBoardSizeX) + numberCol - numberOfMoves);
+                if (targetIndexWest == indexOfZero) {
+                    directionalOffset = -1 * numberOfMoves;
+                    directionalOffsetToMidTileFromZero = +1;
+                    i = 100;
+                }
+            }
 
-        public Change(int a, int b) {
-            this.a = a;
-            this.b = b;
+            // right possible
+            if (numberCol + numberOfMoves <= gameBoardSizeX - 1) {
+                int targetIndexEast = ((numberRow * gameBoardSizeX) + numberCol + numberOfMoves);
+                if (targetIndexEast == indexOfZero) {
+                    directionalOffset = 1 * numberOfMoves;
+                    directionalOffsetToMidTileFromZero = -1;
+                }
+            }
 
-        }
+            // north possible
+            if (numberRow - numberOfMoves >= 0) {
+                int targetIndexNorth = (numberToMoveIndex - gameBoardSizeX * numberOfMoves);
+                if (targetIndexNorth == indexOfZero) {
+                    directionalOffset = -gameBoardSizeX * numberOfMoves;
+                    directionalOffsetToMidTileFromZero = 1 * gameBoardSizeX;
+                }
+            }
 
-    }
-
-    public void test(){
-        List<Change> changes = new ArrayList<>();
-
-
-
-
-    }
-
-
-    private int checkMove(int numberToMoveIndex, int indexOfZero, int numberRow, int numberCol, int numberOfMoves) {
-        // check if movement to the left is possible if the tile is empty.
-        if (numberCol - numberOfMoves >= 0) {
-            int indexWest = ((numberRow * gameBoardSizeX) + numberCol - numberOfMoves);
-            if (indexWest == indexOfZero) {
-                return indexWest;
+            // south possible
+            if (numberRow + numberOfMoves <= gameBoardSizeY - 1) {
+                int targetIndexSouth = (numberToMoveIndex + gameBoardSizeX * numberOfMoves);
+                if (targetIndexSouth == indexOfZero) {
+                    directionalOffset = gameBoardSizeX * numberOfMoves;
+                    directionalOffsetToMidTileFromZero = -1 * gameBoardSizeX;
+                }
             }
         }
 
-        // check if movement to the right..
-        if (numberCol + numberOfMoves <= gameBoardSizeX - 1) {
-            int indexEast = ((numberRow * gameBoardSizeX) + numberCol + numberOfMoves);
-            if (indexEast == indexOfZero) {
-                return indexEast;
+        // create moves based on directional offsets
+        if (directionalOffset != 0) {
+            if (numberOfMoves == 1) {
+                changes.add(new Change(numberToMoveIndex, 0));
+                changes.add(new Change(indexOfZero, numberToMove));
+            } else if (numberOfMoves == 2) {
+                int midTileIndex = indexOfZero + directionalOffsetToMidTileFromZero;
+                int midTileValue = gameBoard.get(midTileIndex);
+                changes.add(new Change(midTileIndex, gameBoard.get(numberToMoveIndex)));
+                changes.add(new Change(indexOfZero, midTileValue));
+                changes.add(new Change(numberToMoveIndex, 0));
             }
         }
-
-        // check if movement up is possible....~
-        if (numberRow - numberOfMoves >= 0) {
-            int indexNorth = (numberToMoveIndex - gameBoardSizeX * numberOfMoves);
-            if (indexNorth == indexOfZero) {
-                return indexNorth;
-            }
-        }
-
-        // check if movment down...
-        if (numberRow + numberOfMoves <= gameBoardSizeY - 1) {
-            int indexSouth = (numberToMoveIndex + gameBoardSizeX * numberOfMoves);
-            if (indexSouth == indexOfZero) {
-                return indexSouth;
-            }
-        }
-
-        // if no movement was possible return -1
-        IO.println("no movement possible");
-        return -1;
+        return changes;
     }
 
 
