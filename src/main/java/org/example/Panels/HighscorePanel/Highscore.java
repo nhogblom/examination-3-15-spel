@@ -37,6 +37,10 @@ public class Highscore implements Serializable {
         }
     }
 
+    public LocalTime getCompletionTime() {
+        return completionTime;
+    }
+
     private void addToArrayList(ArrayList<Highscore> arrayListToAddTo) {
         arrayListToAddTo.add(this);
         IO.println("Adding Highscore to List" + arrayListToAddTo);
