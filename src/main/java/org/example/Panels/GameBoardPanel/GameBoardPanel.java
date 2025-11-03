@@ -126,16 +126,12 @@ public class GameBoardPanel extends JPanel {
     }
 
     private void addNewHighScore() {
-        //TODO här kan man lägga till kontroll ifall det är ny Highscore TOG BORT !ofg.getUsername().equals("Demo") || för att testa highscore för medium + hard
         if (!ofg.getUsername().equals("Demo")){
             new Highscore(ofg.getUsername(), ofg.getMoveCounter(),ofg.getDifficulty(),elapsedTime);
         }
     }
 
     private void printWinningScreen() {
-        //todo här kan vi lägga till vinster med mera till highscore~
-
-
         addNewHighScore();
         gameBoardPanel.setVisible(false);
         // sätter en vinstskärm
@@ -143,9 +139,6 @@ public class GameBoardPanel extends JPanel {
         winningPicture.setVisible(true);
         revalidate();
         repaint();
-        //todo ta bort denna och inkludera istället getMoveCounter till lagring av highscore~
-        // testar move counter
-        System.out.println("Du vann på " + ofg.getMoveCounter() + " steg.");
     }
 
     private Color randomColor() {

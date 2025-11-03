@@ -22,8 +22,6 @@ public class Highscore implements Serializable {
     public Highscore() {
     }
 
-    //TODO add time for the time it took to clear game
-
     public Highscore(String name, int turns, String Difficulty, LocalTime completionTime) {
         this.name = name;
         this.turns = turns;
