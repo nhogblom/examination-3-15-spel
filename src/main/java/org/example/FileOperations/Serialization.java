@@ -11,9 +11,10 @@ import java.util.List;
 
 public class Serialization{
 
-    private final String fileNameEasy = "highscores.txt";
-    private final String fileNameMedium = "highscoresMedium.txt";
-    private final String fileNameHard = "highscoresHard.txt";
+
+    private final String fileNameEasy = "src/main/resources/highscores.txt";
+    private final String fileNameMedium = "src/main/resources/highscoresMedium.txt";
+    private final String fileNameHard = "src/main/resources/highscoresHard.txt";
     Highscore highscore;
 
 
@@ -21,11 +22,9 @@ public class Serialization{
         serializeFunction(Highscore.getHighscoresList(),fileNameEasy);
         serializeFunction(Highscore.getHighscoresListMedium(),fileNameMedium);
         serializeFunction(Highscore.getHighscoresListHard(),fileNameHard);
-
     }
     private void serializeFunction(ArrayList<Highscore> highscoreList, String fileName) {
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
-
             oos.writeObject(highscoreList);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -44,9 +43,7 @@ public class Serialization{
         ArrayList<Highscore> highscores = new ArrayList<>();
         if(doesFileExist(fileName)){
             try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))){
-
                 highscores = ((ArrayList<Highscore>) ois.readObject());
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
