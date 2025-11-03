@@ -93,6 +93,7 @@ public class OneFiveGame {
         return currentGameWon;
     }
 
+
     private int isMovePossibleAndWhereTo(int numberToMove) {
         // index of the number that we want to move.
         int numberToMoveIndex = gameBoard.indexOf(numberToMove);
@@ -102,24 +103,34 @@ public class OneFiveGame {
         int numberRow = numberToMoveIndex / gameBoardSizeX;
         int numberCol = numberToMoveIndex % gameBoardSizeX;
 
+        if(checkSingleMove(numberToMoveIndex, indexOfZero, numberRow, numberCol,2) != -1){
+            IO.println("Double Move Possible");
+            return checkSingleMove(numberToMoveIndex, indexOfZero, numberRow, numberCol,2);
+        }else{
+            return checkSingleMove(numberToMoveIndex, indexOfZero, numberRow, numberCol,1);
+        }
+    }
+
+
+    private int checkSingleMove(int numberToMoveIndex, int indexOfZero, int  numberRow, int numberCol, int numberOfMoves) {
         // check if movement to the left is possible if the tile is empty.
-        if (numberCol - 1 >= 0) {
-            int indexWest = ((numberRow * gameBoardSizeX) + numberCol - 1);
+        if (numberCol - numberOfMoves >= 0) {
+            int indexWest = ((numberRow * gameBoardSizeX) + numberCol - numberOfMoves);
             if (indexWest == indexOfZero) {
                 return indexWest;
             }
         }
 
         // check if movement to the right..
-        if (numberCol + 1 <= gameBoardSizeX - 1) {
-            int indexEast = ((numberRow * gameBoardSizeX) + numberCol + 1);
+        if (numberCol + numberOfMoves <= gameBoardSizeX - numberOfMoves) {
+            int indexEast = ((numberRow * gameBoardSizeX) + numberCol + numberOfMoves);
             if (indexEast == indexOfZero) {
                 return indexEast;
             }
         }
 
         // check if movement up is possible....~
-        if (numberRow - 1 >= 0) {
+        if (numberRow - numberOfMoves >= 0) {
             int indexNorth = (numberToMoveIndex - gameBoardSizeX);
             if (indexNorth == indexOfZero) {
                 return indexNorth;
@@ -127,13 +138,12 @@ public class OneFiveGame {
         }
 
         // check if movment down...
-        if (numberRow + 1 <= gameBoardSizeY - 1) {
+        if (numberRow + numberOfMoves <= gameBoardSizeY - numberOfMoves) {
             int indexSouth = (numberToMoveIndex + gameBoardSizeX);
             if (indexSouth == indexOfZero) {
                 return indexSouth;
             }
         }
-
         // if no movement was possible return -1
         return -1;
     }
