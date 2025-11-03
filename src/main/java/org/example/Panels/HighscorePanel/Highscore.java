@@ -16,7 +16,6 @@ public class Highscore implements Serializable {
     private static ArrayList<Highscore> highscoresList = new ArrayList<>();
     private static ArrayList<Highscore> highscoresListMedium = new ArrayList<>();
     private static ArrayList<Highscore> highscoresListHard = new ArrayList<>();
-    private int gameSize;
     private final int maxHighscores = 5;
     private LocalTime completionTime;
 
