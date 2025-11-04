@@ -123,7 +123,7 @@ public class OneFiveGame {
                 if (targetIndexWest == indexOfZero) {
                     directionalOffset = -1 * numberOfMoves;
                     directionalOffsetToMidTileFromZero = +1;
-                    i = 100;
+
                 }
             }
 
@@ -155,7 +155,7 @@ public class OneFiveGame {
             }
         }
 
-        // create moves based on directional offsets
+        // create changes of the gameboard setup based on directional offsets from above.
         if (directionalOffset != 0) {
             if (numberOfMoves == 1) {
                 changes.add(new Change(numberToMoveIndex, 0));
