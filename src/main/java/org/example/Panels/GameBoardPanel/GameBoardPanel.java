@@ -142,8 +142,8 @@ public class GameBoardPanel extends JPanel {
     }
 
     private Color randomColor() {
-        Random rng = new Random();
-        return new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
+        Random r = new Random();
+        return new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
     }
 
     private void partyColorCelebration() {
@@ -151,7 +151,7 @@ public class GameBoardPanel extends JPanel {
         final int[] ticks = {0};   // räknare
 
         Timer t = new Timer(300, e -> {
-            // Byt färg på alla knappar
+            // Change color of all game buttons
             for (JButton b : gameButtons) {
                 b.setOpaque(true);
                 b.setContentAreaFilled(true);
@@ -160,7 +160,7 @@ public class GameBoardPanel extends JPanel {
 
             ticks[0]++;
 
-            // När vi nått max, stoppa timern och byt skärm till vinstskärmen.
+            // Stop when max ticks are achieved.
             if (ticks[0] >= maxTicks) {
                 ((Timer) e.getSource()).stop();
                 printWinningScreenAndSetHighScore();
