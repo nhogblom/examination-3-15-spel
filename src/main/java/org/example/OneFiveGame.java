@@ -21,7 +21,7 @@ public class OneFiveGame {
 
 
     public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, Difficulty difficulty) {
-        if (username.equals("Demo")) {
+        if (username.equalsIgnoreCase("Demo")) {
             this.isDemo = true;
         }
         this.username = username;
