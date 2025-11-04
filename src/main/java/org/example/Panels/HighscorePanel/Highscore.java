@@ -39,7 +39,6 @@ public class Highscore implements Serializable {
 
     private void addToArrayList(ArrayList<Highscore> arrayListToAddTo) {
         arrayListToAddTo.add(this);
-        IO.println("Adding Highscore to List" + arrayListToAddTo);
         sortArrayListByTurns(arrayListToAddTo);
         if (arrayListToAddTo.size() > maxHighscores) {
             removeElementsOutsideOfHighscore();
