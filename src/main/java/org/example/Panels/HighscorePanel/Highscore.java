@@ -3,7 +3,6 @@ package org.example.Panels.HighscorePanel;
 import org.example.Enums.Difficulty;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,7 +53,7 @@ public class Highscore implements Serializable {
     }
 
     public ArrayList<Highscore> sortArrayListByTurns(ArrayList<Highscore> hlist) {
-        Collections.sort(hlist, new sortByTurns());
+        Collections.sort(hlist, new SortByTurns());
         return hlist;
     }
 
@@ -103,7 +102,7 @@ public class Highscore implements Serializable {
     }
 }
 
-class sortByTurns implements Comparator<Highscore> {
+class SortByTurns implements Comparator<Highscore> {
     @Override
     public int compare(Highscore h1, Highscore h2) {
         if(h1.getTurns() == h2.getTurns()){
