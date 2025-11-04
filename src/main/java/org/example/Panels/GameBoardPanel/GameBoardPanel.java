@@ -131,10 +131,10 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
-    private void printWinningScreen() {
+    private void printWinningScreenAndSetHighScore() {
+        // show winning screen and set hightscore.
         addNewHighScore();
         gameBoardPanel.setVisible(false);
-        // sätter en vinstskärm
         add(winningPicture, BorderLayout.CENTER);
         winningPicture.setVisible(true);
         revalidate();
@@ -163,7 +163,7 @@ public class GameBoardPanel extends JPanel {
             // När vi nått max, stoppa timern och byt skärm till vinstskärmen.
             if (ticks[0] >= maxTicks) {
                 ((Timer) e.getSource()).stop();
-                printWinningScreen();
+                printWinningScreenAndSetHighScore();
             }
         });
 
