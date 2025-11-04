@@ -1,7 +1,7 @@
 package org.example;
 
 public class Change {
-    private int from, to;
+    private final int from, to;
 
     public Change(int from, int to) {
         this.from = from;

@@ -2,7 +2,7 @@ package org.example.Panels.StartPanel;
 
 import org.example.GUI;
 import org.example.Panels.StartPanel.ButtonActionListener.HighscoreButtonActionListener;
-import org.example.Panels.StartPanel.ButtonActionListener.startButtonActionListener;
+import org.example.Panels.StartPanel.ButtonActionListener.StartButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,18 +32,10 @@ public class StartPanel extends JPanel {
     optionsPanel.add(startButton);
     optionsPanel.add(highscoreButton);
     optionsPanel.add(exitButton);
-    exitButton.addActionListener(e -> gui.closeProgram());
+    exitButton.addActionListener(_ -> gui.closeProgram());
     footerPanel.add(footerSignature);
-    startButton.addActionListener(new startButtonActionListener(this,gui));
+    startButton.addActionListener(new StartButtonActionListener(this,gui));
     highscoreButton.addActionListener(new HighscoreButtonActionListener(this));
 
-    }
-
-    public GUI getGui() {
-        return gui;
-    }
-
-    public void setGui(GUI gui) {
-        this.gui = gui;
     }
 }

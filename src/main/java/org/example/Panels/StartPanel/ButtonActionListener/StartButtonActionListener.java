@@ -3,18 +3,17 @@ package org.example.Panels.StartPanel.ButtonActionListener;
 
 import org.example.GUI;
 import org.example.Panels.LoginPanel.LoginPanel;
-import org.example.Panels.StartPanel.StartPanel;
 
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class startButtonActionListener implements ActionListener {
+public class StartButtonActionListener implements ActionListener {
     JPanel startPanel;
     GUI gui;
 
-    public startButtonActionListener(JPanel startPanel, GUI gui) {
+    public StartButtonActionListener(JPanel startPanel, GUI gui) {
         this.startPanel = startPanel;
         this.gui = gui;
     }

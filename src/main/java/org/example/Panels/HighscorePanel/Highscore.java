@@ -12,16 +12,14 @@ public class Highscore implements Serializable {
 
     private final static long serialVersionUID = 1L;
 
-    private String name;
-    private int turns;
+    private final String name;
+    private final int turns;
     private static ArrayList<Highscore> highscoresList = new ArrayList<>();
     private static ArrayList<Highscore> highscoresListMedium = new ArrayList<>();
     private static ArrayList<Highscore> highscoresListHard = new ArrayList<>();
     private final int maxHighscores = 5;
-    private LocalTime completionTime;
+    private final LocalTime completionTime;
 
-    public Highscore() {
-    }
 
     public Highscore(String name, int turns, Difficulty Difficulty, LocalTime completionTime) {
         this.name = name;
@@ -52,9 +50,8 @@ public class Highscore implements Serializable {
         highscoresList.remove(maxHighscores);
     }
 
-    public ArrayList<Highscore> sortArrayListByTurns(ArrayList<Highscore> hlist) {
+    public void sortArrayListByTurns(ArrayList<Highscore> hlist) {
         Collections.sort(hlist, new SortByTurns());
-        return hlist;
     }
 
     public String getName() {
@@ -73,10 +70,6 @@ public class Highscore implements Serializable {
         Highscore.highscoresListHard = highscoresListHard;
     }
 
-    public void addHighscoreToList() {
-        highscoresList.add(this);
-    }
-
     public static ArrayList<Highscore> getHighscoresListMedium() {
         return highscoresListMedium;
     }
@@ -89,16 +82,8 @@ public class Highscore implements Serializable {
         return highscoresList;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getTurns() {
         return turns;
-    }
-
-    public void setTurns(int turns) {
-        this.turns = turns;
     }
 }
 

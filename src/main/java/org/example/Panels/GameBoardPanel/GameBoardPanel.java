@@ -44,12 +44,10 @@ public class GameBoardPanel extends JPanel {
         buttonPanel.add(moveCountLabel);
         buttonPanel.add(newGameButton);
 
-        newGameButton.addActionListener(e -> {
-            newGame();
-        });
+        newGameButton.addActionListener(_ -> newGame());
 
         buttonPanel.add(backButton);
-        backButton.addActionListener(e -> {
+        backButton.addActionListener(_ -> {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
             frame.setContentPane(previousPanel);
             frame.revalidate();
@@ -58,7 +56,7 @@ public class GameBoardPanel extends JPanel {
 
         buttonPanel.add(closeButton);
         buttonPanel.add(timeLabel);
-        closeButton.addActionListener(e -> gui.closeProgram());
+        closeButton.addActionListener(_ -> gui.closeProgram());
 
         //Spelet Grid CENTER
         add(gameBoardPanel, BorderLayout.CENTER);
@@ -98,9 +96,7 @@ public class GameBoardPanel extends JPanel {
             } else {
                 curButton = new JButton(String.valueOf(gameBoard.get(i)));
                 if (!ofg.isGameWon()) {
-                    curButton.addActionListener(e -> {
-                        moveAndRepaint(Integer.parseInt(curButton.getText()));
-                    });
+                    curButton.addActionListener(_ -> moveAndRepaint(Integer.parseInt(curButton.getText())));
                 }
             }
             gameButtons.add(curButton);
@@ -115,7 +111,7 @@ public class GameBoardPanel extends JPanel {
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         printGameBoard();
-        moveCountLabel.setText("Moves: " + String.valueOf(ofg.getMoveCounter()));
+        moveCountLabel.setText("Moves: " + ofg.getMoveCounter());
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
         if (ofg.isGameWon()) {
@@ -147,8 +143,8 @@ public class GameBoardPanel extends JPanel {
     }
 
     private void partyColorCelebration() {
-        final int maxTicks = 20;   // antal gånger
-        final int[] ticks = {0};   // räknare
+        final int maxTicks = 20;
+        final int[] ticks = {0};
 
         Timer t = new Timer(300, e -> {
             // Change color of all game buttons

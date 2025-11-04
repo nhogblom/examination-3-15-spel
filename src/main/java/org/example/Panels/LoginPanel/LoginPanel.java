@@ -45,7 +45,7 @@ public class LoginPanel extends JPanel {
         difficultyButtonPanel.add(HardDifficultyButton);
 
         add(backButton);
-        backButton.addActionListener(e -> {
+        backButton.addActionListener(_ -> {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
             frame.setContentPane(new StartPanel(this.gui));
             frame.revalidate();

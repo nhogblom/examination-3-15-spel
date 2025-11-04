@@ -8,16 +8,15 @@ import java.util.Collections;
 import java.util.List;
 
 public class OneFiveGame {
-    private List<Integer> gameBoard = new ArrayList<>();
+    private final List<Integer> gameBoard = new ArrayList<>();
     private int gameBoardSizeX;
     private int gameBoardSizeY;
     private int amountOfBoardTiles;
     private boolean isDemo = false;
     private boolean gameWon = false;
-    private String username;
+    private final String username;
     private int moveCounter = 0;
-    private Difficulty difficulty;
-
+    private final Difficulty difficulty;
 
 
     public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, Difficulty difficulty) {
@@ -122,7 +121,7 @@ public class OneFiveGame {
                 int targetIndexWest = ((numberRow * gameBoardSizeX) + numberCol - numberOfMoves);
                 if (targetIndexWest == indexOfZero) {
                     directionalOffset = -1 * numberOfMoves;
-                    directionalOffsetToMidTileFromZero = +1;
+                    directionalOffsetToMidTileFromZero = 1;
 
                 }
             }
@@ -223,7 +222,7 @@ public class OneFiveGame {
         int rowOfZeroFromTheBottom = gameBoardSizeY - (gameBoard.indexOf(0) / gameBoardSizeX);
         boolean zeroIsOnAUnevenRowFromTheBottom = rowOfZeroFromTheBottom % 2 == 1;
 
-        // räkna antalet inversions
+        // Counts number of inversions
         for (int i = 0; i < gameBoard.size(); i++) {
             for (int j = i + 1; j < gameBoard.size(); j++) {
                 if (gameBoard.get(i) != 0 && gameBoard.get(j) != 0 && gameBoard.get(i) > gameBoard.get(j)) {
@@ -232,7 +231,7 @@ public class OneFiveGame {
             }
         }
 
-        // beroende på spelets antal av kolumner samt position av 0 samt antalet av inversions kontrollera om spelet är lösbart~
+        // checks if game is solvable depending on number of columns and placement of 0
         boolean inversionsEven = inversions % 2 == 0;
         if (!evenColumns && inversionsEven) {
             return true;

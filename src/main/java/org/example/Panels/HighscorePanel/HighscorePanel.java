@@ -1,11 +1,8 @@
 package org.example.Panels.HighscorePanel;
-
-import org.example.Enums.Difficulty;
 import org.example.Panels.HighscorePanel.ButtonActionListener.BackButtonActionListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class HighscorePanel extends JPanel {
