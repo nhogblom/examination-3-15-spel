@@ -17,7 +17,7 @@ This project focuses on clean code, event-driven programming, and basic GUI deve
 ## 🎯 Features
 
 - Click-to-move tiles (only valid moves allowed)
-- **Start new game* – always generates a solvable puzzle
+- **Start new game** – always generates a solvable puzzle
 - **Win detection** with a celebratory message and visual feedback
 - Move counter and timer (optional)
 - Simple code structure that’s easy to expand
