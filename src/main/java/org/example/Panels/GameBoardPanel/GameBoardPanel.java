@@ -111,7 +111,7 @@ public class GameBoardPanel extends JPanel {
 
     private void moveAndRepaint(int number) {
 
-        ofg.moveNumber(number);
+        ofg.moveTileNumber(number);
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         printGameBoard();

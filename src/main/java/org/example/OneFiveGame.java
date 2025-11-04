@@ -65,7 +65,7 @@ public class OneFiveGame {
         }
     }
 
-    public void moveNumber(int numberToMove) {
+    public void moveTileNumber(int numberToMove) {
         List<Change> tileChanges = getTilesToMove(numberToMove);
 
         for (int i = 0; i < tileChanges.size(); i++) {
@@ -212,7 +212,7 @@ public class OneFiveGame {
     public void getTerminalPickFromUser() {
         String tileToMove = IO.readln("Skriv in den siffra du vill flytta: ");
         int tileToMoveInt = Integer.parseInt(tileToMove);
-        moveNumber(tileToMoveInt);
+        moveTileNumber(tileToMoveInt);
     }
 
     private boolean isSolvable(List<Integer> gameBoard) {
