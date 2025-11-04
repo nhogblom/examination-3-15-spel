@@ -66,14 +66,14 @@ public class OneFiveGame {
     }
 
     public void move(int numberToMove) {
-        List<Change> changes = getChangesToMove(numberToMove);
+        List<Change> tileChanges = getTilesToMove(numberToMove);
 
-        for (int i = 0; i < changes.size(); i++) {
-            gameBoard.set(changes.get(i).getFrom(), changes.get(i).getTo());
+        for (int i = 0; i < tileChanges.size(); i++) {
+            gameBoard.set(tileChanges.get(i).getFrom(), tileChanges.get(i).getTo());
         }
-        if (changes.size() == 3) {
+        if (tileChanges.size() == 3) {
             moveCounter += 2;
-        } else if (changes.size() == 2) {
+        } else if (tileChanges.size() == 2) {
             moveCounter++;
         }
         setIfGameIsWon();
@@ -98,7 +98,7 @@ public class OneFiveGame {
     }
 
 
-    private List<Change> getChangesToMove(int numberToMove) {
+    private List<Change> getTilesToMove(int numberToMove) {
         List<Change> changes = new ArrayList<>();
         // index of the number that we want to move.
         int numberToMoveIndex = gameBoard.indexOf(numberToMove);
