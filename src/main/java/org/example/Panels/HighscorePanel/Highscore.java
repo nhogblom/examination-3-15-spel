@@ -1,5 +1,7 @@
 package org.example.Panels.HighscorePanel;
 
+import org.example.Enums.Difficulty;
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.time.LocalTime;
@@ -22,12 +24,12 @@ public class Highscore implements Serializable {
     public Highscore() {
     }
 
-    public Highscore(String name, int turns, String Difficulty, LocalTime completionTime) {
+    public Highscore(String name, int turns, Difficulty Difficulty, LocalTime completionTime) {
         this.name = name;
         this.turns = turns;
         this.completionTime = completionTime;
 
-        switch (Difficulty) {
+        switch (Difficulty.getDescription()) {
             case "Easy" -> addToArrayList(highscoresList);
             case "Medium" -> addToArrayList(highscoresListMedium);
             case "Hard" -> addToArrayList(highscoresListHard);

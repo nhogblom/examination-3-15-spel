@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.Enums.Difficulty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,13 +16,13 @@ public class OneFiveGame {
     private boolean gameWon = false;
     private String username;
     private int moveCounter = 0;
-    private String difficulty;
+    private Difficulty difficulty;
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, String difficulty) {
+    public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, Difficulty difficulty) {
         if (username.equals("Demo")) {
             this.isDemo = true;
         }
