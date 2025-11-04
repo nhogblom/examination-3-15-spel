@@ -126,7 +126,7 @@ public class GameBoardPanel extends JPanel {
     }
 
     private void addNewHighScore() {
-        if (!ofg.getUsername().equals("Demo")){
+        if (!ofg.getUsername().equalsIgnoreCase("Demo")){
             new Highscore(ofg.getUsername(), ofg.getMoveCounter(),ofg.getDifficulty(),elapsedTime);
         }
     }
