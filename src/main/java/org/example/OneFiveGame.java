@@ -200,6 +200,7 @@ public class OneFiveGame {
         return moveCounter;
     }
 
+    // used for debug and development
     public void printGameBoardToTerminal() {
         for (int i = 0; i < gameBoardSizeY; i++) {
             for (int j = 0; j < gameBoard.size() / gameBoardSizeX; j++) {
@@ -209,6 +210,7 @@ public class OneFiveGame {
         }
     }
 
+    // used for debug and development
     public void getTerminalPickFromUser() {
         String tileToMove = IO.readln("Skriv in den siffra du vill flytta: ");
         int tileToMoveInt = Integer.parseInt(tileToMove);
