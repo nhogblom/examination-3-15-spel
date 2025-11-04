@@ -20,7 +20,7 @@ public class GameBoardPanel extends JPanel {
     JButton backButton = new JButton("Back");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
-    //todo se till att width och height blir korrekt, orignal bilden är 768x768~
+    //win.png original size 768x768
     JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
     JLabel moveCountLabel = new JLabel();
     JLabel timeLabel = new JLabel("Time: 00:00:10");
@@ -97,7 +97,7 @@ public class GameBoardPanel extends JPanel {
                 curButton = new JButton("");
             } else {
                 curButton = new JButton(String.valueOf(gameBoard.get(i)));
-                if (!ofg.isCurrentGameWon()) {
+                if (!ofg.isGameWon()) {
                     curButton.addActionListener(e -> {
                         moveAndRepaint(Integer.parseInt(curButton.getText()));
                     });
@@ -111,14 +111,14 @@ public class GameBoardPanel extends JPanel {
 
     private void moveAndRepaint(int number) {
 
-        ofg.move(number);
+        ofg.moveTileNumber(number);
         gameBoardPanel.removeAll();
         GameBoardPanel.gameButtons.clear();
         printGameBoard();
         moveCountLabel.setText("Moves: " + String.valueOf(ofg.getMoveCounter()));
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
-        if (ofg.isCurrentGameWon()) {
+        if (ofg.isGameWon()) {
             elapsedTime = gameTimer.getGameTime();
             gameTimer.interrupt();
             partyColorCelebration();
@@ -126,15 +126,15 @@ public class GameBoardPanel extends JPanel {
     }
 
     private void addNewHighScore() {
-        if (!ofg.getUsername().equals("Demo")){
+        if (!ofg.getUsername().equalsIgnoreCase("Demo")){
             new Highscore(ofg.getUsername(), ofg.getMoveCounter(),ofg.getDifficulty(),elapsedTime);
         }
     }
 
-    private void printWinningScreen() {
+    private void printWinningScreenAndSetHighScore() {
+
         addNewHighScore();
         gameBoardPanel.setVisible(false);
-        // sätter en vinstskärm
         add(winningPicture, BorderLayout.CENTER);
         winningPicture.setVisible(true);
         revalidate();
@@ -142,8 +142,8 @@ public class GameBoardPanel extends JPanel {
     }
 
     private Color randomColor() {
-        Random rng = new Random();
-        return new Color(rng.nextInt(256), rng.nextInt(256), rng.nextInt(256));
+        Random r = new Random();
+        return new Color(r.nextInt(256), r.nextInt(256), r.nextInt(256));
     }
 
     private void partyColorCelebration() {
@@ -151,19 +151,18 @@ public class GameBoardPanel extends JPanel {
         final int[] ticks = {0};   // räknare
 
         Timer t = new Timer(300, e -> {
-            // Byt färg på alla knappar
+            // Change color of all game buttons
             for (JButton b : gameButtons) {
-                b.setOpaque(true);
                 b.setContentAreaFilled(true);
                 b.setBackground(randomColor());
             }
 
             ticks[0]++;
 
-            // När vi nått max, stoppa timern och byt skärm till vinstskärmen.
+            // Stop when max ticks are achieved.
             if (ticks[0] >= maxTicks) {
                 ((Timer) e.getSource()).stop();
-                printWinningScreen();
+                printWinningScreenAndSetHighScore();
             }
         });
 

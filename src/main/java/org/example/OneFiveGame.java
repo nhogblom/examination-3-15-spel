@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.Enums.Difficulty;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,17 +13,15 @@ public class OneFiveGame {
     private int gameBoardSizeY;
     private int amountOfBoardTiles;
     private boolean isDemo = false;
-    private boolean currentGameWon = false;
+    private boolean gameWon = false;
     private String username;
     private int moveCounter = 0;
-    private String difficulty;
+    private Difficulty difficulty;
 
-    public String getDifficulty() {
-        return difficulty;
-    }
 
-    public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, String difficulty) {
-        if (username.equals("Demo")) {
+
+    public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, Difficulty difficulty) {
+        if (username.equalsIgnoreCase("Demo")) {
             this.isDemo = true;
         }
         this.username = username;
@@ -29,11 +29,11 @@ public class OneFiveGame {
         this.gameBoardSizeY = gameBoardSizeY;
         this.difficulty = difficulty;
         this.amountOfBoardTiles = gameBoardSizeX * gameBoardSizeY;
-        createGameBoard();
+        generateGameBoard();
     }
 
 
-    public void createGameBoard() {
+    public void generateGameBoard() {
         if (isDemo) {
             // one move to win demo.
             gameBoardSizeX = 4;
@@ -65,40 +65,40 @@ public class OneFiveGame {
         }
     }
 
-    public void move(int numberToMove) {
-        List<Change> changes = getChangesToMove(numberToMove);
+    public void moveTileNumber(int numberToMove) {
+        List<Change> tileChanges = getTilesToMove(numberToMove);
 
-        for (int i = 0; i < changes.size(); i++) {
-            gameBoard.set(changes.get(i).getFrom(), changes.get(i).getTo());
+        for (int i = 0; i < tileChanges.size(); i++) {
+            gameBoard.set(tileChanges.get(i).getFrom(), tileChanges.get(i).getTo());
         }
-        if (changes.size() == 3) {
+        if (tileChanges.size() == 3) {
             moveCounter += 2;
-        } else if (changes.size() == 2) {
+        } else if (tileChanges.size() == 2) {
             moveCounter++;
         }
-        setIfGameIsWon();
+        ifGameIsWonSetGameWon();
     }
 
 
-    private void setIfGameIsWon() {
+    private void ifGameIsWonSetGameWon() {
         if (gameBoard.getLast() == 0) {
             for (int i = 0; i < gameBoard.size(); i++) {
                 if (gameBoard.get(i) == 0) {
-                    this.currentGameWon = true;
+                    this.gameWon = true;
                 } else if (gameBoard.get(i) != (i + 1)) {
-                    this.currentGameWon = false;
+                    this.gameWon = false;
                     break;
                 }
             }
         }
     }
 
-    public boolean isCurrentGameWon() {
-        return currentGameWon;
+    public boolean isGameWon() {
+        return gameWon;
     }
 
 
-    private List<Change> getChangesToMove(int numberToMove) {
+    private List<Change> getTilesToMove(int numberToMove) {
         List<Change> changes = new ArrayList<>();
         // index of the number that we want to move.
         int numberToMoveIndex = gameBoard.indexOf(numberToMove);
@@ -113,6 +113,7 @@ public class OneFiveGame {
         int directionalOffset = 0;
         int directionalOffsetToMidTileFromZero = 0;
 
+        // loop 2 times to check if the chosen move should move 1 or 2 tiles.
         for (int i = 1; i <= 2 && directionalOffset == 0; i++) {
             numberOfMoves = i;
 
@@ -122,7 +123,7 @@ public class OneFiveGame {
                 if (targetIndexWest == indexOfZero) {
                     directionalOffset = -1 * numberOfMoves;
                     directionalOffsetToMidTileFromZero = +1;
-                    i = 100;
+
                 }
             }
 
@@ -154,7 +155,7 @@ public class OneFiveGame {
             }
         }
 
-        // create moves based on directional offsets
+        // create changes of the gameboard setup based on directional offsets from above.
         if (directionalOffset != 0) {
             if (numberOfMoves == 1) {
                 changes.add(new Change(numberToMoveIndex, 0));
@@ -179,6 +180,10 @@ public class OneFiveGame {
         return gameBoard;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
     public int getGameBoardSizeX() {
         return gameBoardSizeX;
     }
@@ -195,6 +200,7 @@ public class OneFiveGame {
         return moveCounter;
     }
 
+    // used for debug and development
     public void printGameBoardToTerminal() {
         for (int i = 0; i < gameBoardSizeY; i++) {
             for (int j = 0; j < gameBoard.size() / gameBoardSizeX; j++) {
@@ -204,10 +210,11 @@ public class OneFiveGame {
         }
     }
 
+    // used for debug and development
     public void getTerminalPickFromUser() {
-        String tokenToMove = IO.readln("Skriv in den siffra du vill flytta: ");
-        int tokenToMoveInt = Integer.parseInt(tokenToMove);
-        move(tokenToMoveInt);
+        String tileToMove = IO.readln("Skriv in den siffra du vill flytta: ");
+        int tileToMoveInt = Integer.parseInt(tileToMove);
+        moveTileNumber(tileToMoveInt);
     }
 
     private boolean isSolvable(List<Integer> gameBoard) {

@@ -15,7 +15,7 @@ public class LoginPanel extends JPanel {
     JPanel inputPanel = new JPanel();
     JPanel footerPanel = new JPanel();
     JLabel titleLabel = new JLabel("<html><h1>Starting up a new game!</h1></html>");
-    JLabel usernameLabel = new JLabel("Enter your username:");
+    JLabel usernameLabel = new JLabel("<html><h1>Username:</h1></html>");
     JTextField usernameField = new JTextField(15);
     JLabel footerSignature = new JLabel("Ivan & Niklas 2025");
 
@@ -37,6 +37,7 @@ public class LoginPanel extends JPanel {
         add(inputPanel);
         inputPanel.setLayout(new GridLayout(1,2));
         inputPanel.add(usernameLabel);
+        usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         inputPanel.add(usernameField);
         add(difficultyButtonPanel);
         difficultyButtonPanel.add(easyDifficultyButton);
@@ -75,11 +76,11 @@ public class LoginPanel extends JPanel {
         OneFiveGame ofg;
 
         if(difficulty.equals(Difficulty.EASY.getDescription())){
-            ofg = new OneFiveGame(username, Difficulty.EASY.getxRows(), Difficulty.EASY.getyRows(),Difficulty.EASY.getDescription());
+            ofg = new OneFiveGame(username, Difficulty.EASY.getxRows(), Difficulty.EASY.getyRows(),Difficulty.EASY);
         }else if(difficulty.equals(Difficulty.MEDIUM.getDescription())){
-            ofg = new OneFiveGame(username,Difficulty.MEDIUM.getxRows(), Difficulty.MEDIUM.getyRows(),Difficulty.MEDIUM.getDescription());
+            ofg = new OneFiveGame(username,Difficulty.MEDIUM.getxRows(), Difficulty.MEDIUM.getyRows(),Difficulty.MEDIUM);
         }else {
-            ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows(),Difficulty.HARD.getDescription());
+            ofg = new OneFiveGame(username,Difficulty.HARD.getxRows(), Difficulty.HARD.getyRows(),Difficulty.HARD);
         }
             GameBoardPanel gameBoardPanel = new GameBoardPanel(ofg, gui, this);
             frame.add(gameBoardPanel);
