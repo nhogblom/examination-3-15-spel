@@ -15,7 +15,7 @@ public class LoginPanel extends JPanel {
     JPanel inputPanel = new JPanel();
     JPanel footerPanel = new JPanel();
     JLabel titleLabel = new JLabel("<html><h1>Starting up a new game!</h1></html>");
-    JLabel usernameLabel = new JLabel("Enter your username:");
+    JLabel usernameLabel = new JLabel("<html><h1>Username:</h1></html>");
     JTextField usernameField = new JTextField(15);
     JLabel footerSignature = new JLabel("Ivan & Niklas 2025");
 
@@ -37,6 +37,7 @@ public class LoginPanel extends JPanel {
         add(inputPanel);
         inputPanel.setLayout(new GridLayout(1,2));
         inputPanel.add(usernameLabel);
+        usernameLabel.setHorizontalAlignment(JLabel.CENTER);
         inputPanel.add(usernameField);
         add(difficultyButtonPanel);
         difficultyButtonPanel.add(easyDifficultyButton);
