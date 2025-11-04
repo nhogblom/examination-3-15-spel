@@ -132,7 +132,7 @@ public class GameBoardPanel extends JPanel {
     }
 
     private void printWinningScreenAndSetHighScore() {
-        // show winning screen and set hightscore.
+
         addNewHighScore();
         gameBoardPanel.setVisible(false);
         add(winningPicture, BorderLayout.CENTER);
