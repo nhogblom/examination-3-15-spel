@@ -20,7 +20,7 @@ public class GameBoardPanel extends JPanel {
     JButton backButton = new JButton("Back");
     JPanel buttonPanel = new JPanel();
     JPanel gameBoardPanel = new JPanel();
-    //todo se till att width och height blir korrekt, orignal bilden är 768x768~
+    //win.png original size 768x768
     JLabel winningPicture = new JLabel(new ImageIcon(new ImageIcon("src/main/resources/win.png").getImage().getScaledInstance(500, 500, Image.SCALE_DEFAULT)));
     JLabel moveCountLabel = new JLabel();
     JLabel timeLabel = new JLabel("Time: 00:00:10");
