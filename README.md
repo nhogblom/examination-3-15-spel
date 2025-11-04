@@ -19,7 +19,7 @@ This project focuses on clean code, event-driven programming, and basic GUI deve
 - Click-to-move tiles (only valid moves allowed)
 - **Start new game** – always generates a solvable puzzle
 - **Win detection** with a celebratory message and visual feedback
-- Move counter and timer (optional)
+- Move counter and timer
 - Simple code structure that’s easy to expand
 
 <p align="center">
@@ -56,8 +56,8 @@ mvn -Dexec.mainClass="your.package.Main" exec:java
 
 ## 🎮 How to Play
 
-1. Press **New Game** to shuffle the tiles.
-2. Click a tile that is **next to** the empty space to move it.
+1. Press **Start New Game** to enter your username and choose the difficulty of your liking.
+2. Click a tile that is **next to** or two tiles away from the empty space to move it.
 3. Continue until tiles are in order `1…15` with the empty tile at the end.
 4. Enjoy your win moment 🎉
 
@@ -85,29 +85,8 @@ src/
     java/                      // Unit tests (optional)
 ```
 
-> Class names may differ from your implementation – this is just guidance.
-
----
-
-## 🧪 Testing (Optional)
-
-Suggested unit tests:
-
-- `isSolvable()` – shuffling must produce solvable puzzles
-- `isWin()` – correct win detection
-- `canMove()` – only legal moves allowed
-
-Run tests:
-
-```bash
-mvn test
-```
-
----
-
 ## 🛠️ Future Improvements / TODO
 
-- ⏱️ Timer + leaderboard (best scores)
 - ⌨️ Keyboard control (arrow keys)
 - 🎨 Themes (light/dark mode)
 - 🧩 Custom board sizes (3×3, 5×5, etc.)
@@ -119,18 +98,10 @@ mvn test
 
 ---
 
-## 💡 Tips
-
-- Keep **model (logic)** and **view (GUI)** separate to make testing and development easier.
-- Use small, readable methods for tile movement and win checks.
-- Store screenshots/GIFs in a `docs/` folder so they display correctly on GitHub.
-
----
 
 ## 📦 License
 
 Free for educational use.  
-Consider adding a `LICENSE` file if you want to make the project open-source.
 
 ---
 
