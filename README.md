@@ -23,7 +23,7 @@ This project focuses on clean code, event-driven programming, and basic GUI deve
 - Simple code structure that’s easy to expand
 
 <p align="center">
-  <img src="docs/screenshot-start.png" alt="Start screen" width="360"/>
+  <img src="/screenshot-start.png" alt="Start screen" width="360"/>
 </p>
 
 ---
