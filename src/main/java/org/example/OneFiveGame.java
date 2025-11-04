@@ -11,7 +11,7 @@ public class OneFiveGame {
     private int gameBoardSizeY;
     private int amountOfBoardTiles;
     private boolean isDemo = false;
-    private boolean currentGameWon = false;
+    private boolean gameWon = false;
     private String username;
     private int moveCounter = 0;
     private String difficulty;
@@ -76,25 +76,25 @@ public class OneFiveGame {
         } else if (tileChanges.size() == 2) {
             moveCounter++;
         }
-        setIfGameIsWon();
+        ifGameIsWonSetGameWon();
     }
 
 
-    private void setIfGameIsWon() {
+    private void ifGameIsWonSetGameWon() {
         if (gameBoard.getLast() == 0) {
             for (int i = 0; i < gameBoard.size(); i++) {
                 if (gameBoard.get(i) == 0) {
-                    this.currentGameWon = true;
+                    this.gameWon = true;
                 } else if (gameBoard.get(i) != (i + 1)) {
-                    this.currentGameWon = false;
+                    this.gameWon = false;
                     break;
                 }
             }
         }
     }
 
-    public boolean isCurrentGameWon() {
-        return currentGameWon;
+    public boolean isGameWon() {
+        return gameWon;
     }
 
 
@@ -113,6 +113,7 @@ public class OneFiveGame {
         int directionalOffset = 0;
         int directionalOffsetToMidTileFromZero = 0;
 
+        // loop 2 times to check if the chosen move should move 1 or 2 tiles.
         for (int i = 1; i <= 2 && directionalOffset == 0; i++) {
             numberOfMoves = i;
 

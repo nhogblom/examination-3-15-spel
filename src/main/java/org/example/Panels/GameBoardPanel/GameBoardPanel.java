@@ -97,7 +97,7 @@ public class GameBoardPanel extends JPanel {
                 curButton = new JButton("");
             } else {
                 curButton = new JButton(String.valueOf(gameBoard.get(i)));
-                if (!ofg.isCurrentGameWon()) {
+                if (!ofg.isGameWon()) {
                     curButton.addActionListener(e -> {
                         moveAndRepaint(Integer.parseInt(curButton.getText()));
                     });
@@ -118,7 +118,7 @@ public class GameBoardPanel extends JPanel {
         moveCountLabel.setText("Moves: " + String.valueOf(ofg.getMoveCounter()));
         gameBoardPanel.revalidate();
         gameBoardPanel.repaint();
-        if (ofg.isCurrentGameWon()) {
+        if (ofg.isGameWon()) {
             elapsedTime = gameTimer.getGameTime();
             gameTimer.interrupt();
             partyColorCelebration();
