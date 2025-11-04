@@ -153,7 +153,6 @@ public class GameBoardPanel extends JPanel {
         Timer t = new Timer(300, e -> {
             // Change color of all game buttons
             for (JButton b : gameButtons) {
-                b.setOpaque(true);
                 b.setContentAreaFilled(true);
                 b.setBackground(randomColor());
             }
