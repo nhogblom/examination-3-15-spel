@@ -18,9 +18,7 @@ public class OneFiveGame {
     private int moveCounter = 0;
     private Difficulty difficulty;
 
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
+
 
     public OneFiveGame(String username, int gameBoardSizeX, int gameBoardSizeY, Difficulty difficulty) {
         if (username.equals("Demo")) {
@@ -182,6 +180,10 @@ public class OneFiveGame {
         return gameBoard;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
     public int getGameBoardSizeX() {
         return gameBoardSizeX;
     }
@@ -208,9 +210,9 @@ public class OneFiveGame {
     }
 
     public void getTerminalPickFromUser() {
-        String tokenToMove = IO.readln("Skriv in den siffra du vill flytta: ");
-        int tokenToMoveInt = Integer.parseInt(tokenToMove);
-        move(tokenToMoveInt);
+        String tileToMove = IO.readln("Skriv in den siffra du vill flytta: ");
+        int tileToMoveInt = Integer.parseInt(tileToMove);
+        move(tileToMoveInt);
     }
 
     private boolean isSolvable(List<Integer> gameBoard) {
