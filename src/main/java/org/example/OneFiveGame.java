@@ -29,11 +29,11 @@ public class OneFiveGame {
         this.gameBoardSizeY = gameBoardSizeY;
         this.difficulty = difficulty;
         this.amountOfBoardTiles = gameBoardSizeX * gameBoardSizeY;
-        createGameBoard();
+        generateGameBoard();
     }
 
 
-    public void createGameBoard() {
+    public void generateGameBoard() {
         if (isDemo) {
             // one move to win demo.
             gameBoardSizeX = 4;
@@ -65,7 +65,7 @@ public class OneFiveGame {
         }
     }
 
-    public void move(int numberToMove) {
+    public void moveNumber(int numberToMove) {
         List<Change> tileChanges = getTilesToMove(numberToMove);
 
         for (int i = 0; i < tileChanges.size(); i++) {
@@ -212,7 +212,7 @@ public class OneFiveGame {
     public void getTerminalPickFromUser() {
         String tileToMove = IO.readln("Skriv in den siffra du vill flytta: ");
         int tileToMoveInt = Integer.parseInt(tileToMove);
-        move(tileToMoveInt);
+        moveNumber(tileToMoveInt);
     }
 
     private boolean isSolvable(List<Integer> gameBoard) {
